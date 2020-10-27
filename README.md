@@ -8,7 +8,7 @@
 
 **J157_이주현**
 
-**J196_조향래**
+**J196_조항래**
 
 ## WIKI
 - [위키 홈](https://github.com/boostcamp-2020/IssueTracker-32/wiki)
