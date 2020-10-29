@@ -1,21 +1,15 @@
-const { Sequelize, DataTypes } = require('sequelize')
-const dbEnv = require('../config/mysqlConfig')
+const { Sequelize, DataTypes } = require('sequelize');
+const dbConfig = require('../configs/dbConfig').development;
 
-const sequelize = new Sequelize(dbEnv.database, dbEnv.user, dbEnv.password, {
-	host: dbEnv.host,
-	dialect: 'mysql',
-})
+const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
+	host: dbConfig.host,
+	dialect: dbConfig.dialect,
+});
 
-const modelDefiners = [ require('./models/user.model'), 
-require('./models/category.model'), 
-require('./models/paymentMethod.model'), 
-require('./models/transaction.model')]
+const modelDefiners = []
 
 for (const modelDefiner of modelDefiners) {
 	modelDefiner(sequelize, DataTypes)
-}
+};
 
-sequelize.models.user.hasMany(sequelize.models.transaction)
-sequelize.models.user.hasMany(sequelize.models.paymentMethod)
-
-module.exports = sequelize
+module.exports = sequelize;
