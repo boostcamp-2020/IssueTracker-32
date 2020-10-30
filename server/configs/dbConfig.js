@@ -1,4 +1,4 @@
-module.exports = {
+const dbconfigs = {
   "development": {
     "username": process.env.DEV_DB_USERNAME,
     "password": process.env.DEV_DB_PASSWORD,
@@ -14,3 +14,7 @@ module.exports = {
     "dialect": process.env.PRO_DB_DIALECT,
   },
 }
+
+const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
+
+module.exports = dbconfigs[mode];
