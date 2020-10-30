@@ -18,4 +18,4 @@
 - [커밋 컨벤션](https://github.com/boostcamp-2020/IssueTracker-32/wiki/%5BDOC%5D-Commit-Conventions)
 - [API Reference](https://github.com/boostcamp-2020/IssueTracker-32/wiki/%5BDOC%5D-API-Reference)
 - [고민s](https://github.com/boostcamp-2020/IssueTracker-32/wiki/%5BDOC%5D-%EA%B3%A0%EB%AF%BCs)
-- [Git 전력](https://github.com/boostcamp-2020/IssueTracker-32/wiki/%5BDOC%5D-Git-%EC%A0%84%EB%9E%B5)
+- [Branch 룰](https://github.com/boostcamp-2020/IssueTracker-32/wiki/%5BDOC%5D-Git-%EC%A0%84%EB%9E%B5)
