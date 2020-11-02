@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NGINX 테스트</title>
+  </head>
+  <body>
+    <button id="test">fetch 요청!</button>
+    <div id="app"></div>
+
+    <script>
+      const $testButton = document.querySelector("#test");
+      const $app = document.querySelector("#app");
+
+      const BASE_URL = "http://101.101.217.169";
+
+      async function request() {
+        const response = await fetch(`${BASE_URL}/api/test`);
+        if (!response.ok) {
+          console.error("api 요청 에러 발생");
+          return;
+        }
+
+        const json = await response.json();
+        $app.innerText = JSON.stringify(json);
+      }
+
+      $testButton.addEventListener("click", request);
+    </script>
+  </body>
+</html>
