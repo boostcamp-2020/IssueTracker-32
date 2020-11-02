@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
   res.send('Hello!');
 });
 
-app.get('/api/test', (req, res) => {
+app.get('/test', (req, res) => {
   res.json({ test: 'nginx 성공!' });
 });
 
