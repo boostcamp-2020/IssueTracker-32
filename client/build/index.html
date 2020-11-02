@@ -10,14 +10,10 @@
     <div id="app"></div>
 
     <script>
-      const mode = "dev";
       const $testButton = document.querySelector("#test");
       const $app = document.querySelector("#app");
 
-      const BASE_URL =
-        mode === "production"
-          ? "http://101.101.217.169"
-          : "http://localhost:3000";
+      const BASE_URL = "http://101.101.217.169";
 
       async function request() {
         const response = await fetch(`${BASE_URL}/api/test`);
