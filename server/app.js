@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const passport = require('passport');
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
@@ -13,12 +14,13 @@ app.use(cors());
 const db = require('./models');
 db.sequelize.sync({ force: true });
 
-app.get('/', (req, res) => {
-  res.send('Hello!');
-});
+const passportConfig = require('./configs/passportConfig');
+passportConfig.config(passport);
+app.use(passport.initialize());
 
-app.get('/test', (req, res) => {
-  res.json({ test: 'nginx 성공!' });
+app.get('/auth/github', passport.authenticate('github'))
+app.get('/auth/github/callback', passport.authenticate('github', {session : false}), (req, res) => {
+  console.log(req.user);
 });
 
 app.listen(port, () => {
