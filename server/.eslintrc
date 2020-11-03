@@ -10,7 +10,6 @@
   "plugins": [ "prettier" ],
   "rules": {
     "prettier/prettier": "error",
-    "no-console": "off",
-    "endOfLine": "auto"
+    "no-console": "off"
   }
 }
