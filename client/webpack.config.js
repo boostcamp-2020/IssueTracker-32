@@ -43,7 +43,7 @@ module.exports = {
     new HtmlWebpackPlugin({ template: './public/index.html' }),
     new webpack.DefinePlugin({
       API_BASE:
-        process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'http://101.101.217.169',
+        process.env.NODE_ENV === 'development' ? JSON.stringify('http://localhost:3000') : JSON.stringify('http://101.101.217.169/api'),
     }),
   ],
 };
