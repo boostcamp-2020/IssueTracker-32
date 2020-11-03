@@ -42,7 +42,7 @@ const LoginPage = () => {
     <LoginContainer>
       <LoginWrapper>
         <LoginTitle>이슈 트래커</LoginTitle>
-        <LoginButton href="/auth/github">
+        <LoginButton href={`${API_BASE}/auth/github`}>
           <FaGithub />
           <span>Sign in with GitHub</span>
         </LoginButton>

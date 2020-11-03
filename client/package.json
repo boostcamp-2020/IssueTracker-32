@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "webpack-dev-server --progress --open --mode=development",
-    "build": "webpack --progress --mode=production"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --open",
+    "build": "cross-env NODE_ENV=production webpack --progress"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cross-env": "^7.0.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^3.11.0",
