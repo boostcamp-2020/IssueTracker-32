@@ -18,10 +18,9 @@ const passportConfig = require('./configs/passportConfig');
 passportConfig.config(passport);
 app.use(passport.initialize());
 
+const authService = require('./services/auth.service');
 app.get('/auth/github', passport.authenticate('github'))
-app.get('/auth/github/callback', passport.authenticate('github', {session : false}), (req, res) => {
-  res.json(req.user);
-});
+app.get('/auth/github/callback', passport.authenticate('github', {session : false}), authService.issueToken);
 
 app.listen(port, () => {
   console.log(`listening at port ${port}...`);
