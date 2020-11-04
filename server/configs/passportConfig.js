@@ -2,9 +2,11 @@ const db = require('../models/index');
 const User = db.User;
 
 exports.config = passport => {
-  const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
-  const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
-  
+  const GITHUB_CLIENT_ID = (process.env.NODE_ENV === 'development') ? process.env.DEV_GITHUB_CLIENT_ID : process.env.PRO_GITHUB_CLIENT_ID;
+  const GITHUB_CLIENT_SECRET = (process.env.NODE_ENV === 'development') ? process.env.DEV_GITHUB_CLIENT_SECRET : process.env.PRO_GITHUB_CLIENT_SECRET;
+  const SERVER_URL = (process.env.NODE_ENV === 'development') ? process.env.DEV_BACK_SERVER : process.env.PRO_BACK_SERVER;
+  const GITHUB_CALLBACK_URL = SERVER_URL + '/auth/github/callback';
+
   const GitHubStrategy = require('passport-github').Strategy;
   
   passport.use(
@@ -12,7 +14,7 @@ exports.config = passport => {
       {
         clientID: GITHUB_CLIENT_ID,
         clientSecret: GITHUB_CLIENT_SECRET,
-        callbackURL: 'http://localhost:3000/auth/github/callback'
+        callbackURL: GITHUB_CALLBACK_URL
       },
       async(accessToken, refreshToken, profile, done) => {
         try {
