@@ -24,7 +24,6 @@ exports.config = passport => {
           } else {
             const newUserData = {
       	      nickname: profile.displayName,
-              email: profile.emails[0].value,
               github_id: profile.username,
               profile_img_url: profile._json.avatar_url
       	    };
