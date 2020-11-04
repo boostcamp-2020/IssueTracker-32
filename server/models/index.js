@@ -1,9 +1,9 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize } = require('sequelize');
 const dbConfig = require('../configs/dbConfig');
 
 const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
-	host: dbConfig.host,
-	dialect: dbConfig.dialect,
+  host: dbConfig.host,
+  dialect: dbConfig.dialect,
 });
 
 const userModel = require('./user.model.js');
@@ -22,7 +22,6 @@ db.Issue = issueModel(sequelize, Sequelize);
 db.Label = labelModel(sequelize, Sequelize);
 db.Comment = commentModel(sequelize, Sequelize);
 db.Milestone = milestoneModel(sequelize, Sequelize);
-
 
 // 마일스톤 이슈 1 : N
 db.Milestone.hasMany(db.Issue);
