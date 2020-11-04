@@ -19,6 +19,8 @@ passportConfig.config(passport);
 app.use(passport.initialize());
 
 const authService = require('./services/auth.service');
+app.get('/', authService.verifyToken, (req, res) => { res.send(req.data); });
+
 app.get('/auth/github', passport.authenticate('github'))
 app.get('/auth/github/callback', passport.authenticate('github', {session : false}), authService.issueToken);
 
