@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaGithub } from 'react-icons/fa';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const LoginContainer = styled.main`
   display: flex;
@@ -38,6 +39,11 @@ const LoginTitle = styled.h1`
 `;
 
 const LoginPage = () => {
+  const handleClick = async () => {
+    const data = await axios.get(`${API_BASE}/auth/github`);
+    console.log(data);
+  };
+
   return (
     <LoginContainer>
       <LoginWrapper>
@@ -46,6 +52,7 @@ const LoginPage = () => {
           <FaGithub />
           <span>Sign in with GitHub</span>
         </LoginButton>
+        <button onClick={handleClick}></button>
       </LoginWrapper>
     </LoginContainer>
   );
