@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 
-const authService = require('./services/auth.service');
+const authService = require('../services/auth.service');
 
 router.get('/github', passport.authenticate('github'));
 
