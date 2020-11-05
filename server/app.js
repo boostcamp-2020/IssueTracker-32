@@ -22,10 +22,6 @@ app.use(passport.initialize());
 
 const authService = require('./services/auth.service');
 
-app.get('/', authService.verifyToken, (req, res) => {
-  res.send(req.data);
-});
-
 const index = require('./routes/index');
 app.use('/', index);
 
