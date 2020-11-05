@@ -33,6 +33,9 @@ app.get(
   authService.issueToken,
 );
 
+const index = require('./routes/index');
+app.use('/', index);
+
 app.listen(port, () => {
   console.log(`listening at port ${port}...`);
 });
