@@ -12,16 +12,14 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 
 const db = require('./models');
-db.sequelize.sync({ force: true });
+db.sequelize.sync({ force: true }).then((require('./seeder/seeder')));
 
 const passportConfig = require('./configs/passportConfig');
 passportConfig.config(passport);
 app.use(passport.initialize());
 
-app.get('/auth/github', passport.authenticate('github'))
-app.get('/auth/github/callback', passport.authenticate('github', {session : false}), (req, res) => {
-  res.json(req.user);
-});
+const index = require('./routes/index');
+app.use('/', index);
 
 app.listen(port, () => {
   console.log(`listening at port ${port}...`);
