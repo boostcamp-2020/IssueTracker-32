@@ -29,7 +29,7 @@ exports.config = (passport) => {
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
-          const user = await User.findOne({ where: { github_id: profile.id } });
+          const user = await User.findOne({ where: { github_id: profile.username } });
           if (user) {
             return done(null, user);
           }
