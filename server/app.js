@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 
 const db = require('./models');
-db.sequelize.sync({ force: true });
+db.sequelize.sync({ force: true }).then((require('./seeder/seeder')));
 
 const passportConfig = require('./configs/passportConfig');
 passportConfig.config(passport);
