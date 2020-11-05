@@ -1,9 +1,8 @@
 import instance from './interceptor';
+import axios from 'axios';
 
 // TODO: 나중에 api 요청 추가해주세요!
 
-function testAPI() {
-  return instance.get('/');
-}
+const fetchIssues = () => instance.get('/mock/api/issue');
 
-export { testAPI };
+export { fetchIssues };
