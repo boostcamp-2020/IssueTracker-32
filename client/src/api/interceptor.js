@@ -32,6 +32,6 @@ function createAxiosInstance(useMock) {
   return instance;
 }
 
-const useMock = true; // 목업 API 사용 시 true 로 설정하세요!
+const useMock = false; // 목업 API 사용 시 true 로 설정하세요!
 const instance = createAxiosInstance(useMock);
 export default instance;
