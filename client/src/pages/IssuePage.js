@@ -7,13 +7,13 @@ import IssueListContainer from '../components/IssuePage/IssueListContainer';
 const IssuePage = () => {
   const [issueList, setIssueList] = useState([]);
   useEffect(() => {
-    const fetch = async () => {
-      const data = await fetchIssues();
-      console.log(data);
-      return data;
+    const fetchIssueList = async () => {
+      const { data } = await fetchIssues();
+      const fetchedIssueList = data.data;
+      setIssueList(fetchedIssueList);
+      return;
     };
-
-    fetch();
+    fetchIssueList();
   }, []);
 
   return (
