@@ -12,15 +12,11 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 
 const db = require('./models');
-
 db.sequelize.sync({ force: true });
 
 const passportConfig = require('./configs/passportConfig');
-
 passportConfig.config(passport);
 app.use(passport.initialize());
-
-const authService = require('./services/auth.service');
 
 const index = require('./routes/index');
 app.use('/', index);
