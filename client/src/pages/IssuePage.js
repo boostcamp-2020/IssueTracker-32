@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { fetchIssues } from '../api';
 import IssueFilterContainer from '../components/IssuePage/IssueFilterContainer';
 import IssueListContainer from '../components/IssuePage/IssueListContainer';
 
 const IssuePage = () => {
-  const [issueList, setIssueList] = useState(dummyIssueList);
+  const [issueList, setIssueList] = useState([]);
+  useEffect(() => {
+    const fetch = async () => {
+      const data = await fetchIssues();
+      console.log(data);
+      return data;
+    };
 
-  useEffect(() => {}, []);
+    fetch();
+  }, []);
 
   return (
     <div>
