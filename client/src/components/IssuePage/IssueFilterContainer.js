@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const FilterContainer = styled.div`
   display: flex;
   width: 100%;
+  margin-bottom: 15px;
 `;
 
 const FilterWrapper = styled.div`
@@ -13,7 +14,7 @@ const FilterWrapper = styled.div`
 `;
 const FilterButton = styled.button`
   padding: 7px 15px;
-  border-color: #868e96;
+  border: 1px solid #ced4da;
   border-right: none;
   border-top-left-radius: 7px;
   border-bottom-left-radius: 7px;
@@ -22,7 +23,7 @@ const FilterButton = styled.button`
 `;
 const FilterTextInput = styled.input`
   flex: 1;
-  border-color: #868e96;
+  border: 1px solid #ced4da;
   padding: 7px 15px;
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
@@ -34,7 +35,7 @@ const ButtonWrapper = styled.div`
 `;
 const LabelButton = styled.button`
   padding: 7px 15px;
-  border-color: #868e96;
+  border: 1px solid #ced4da;
   border-right: none;
   border-top-left-radius: 7px;
   border-bottom-left-radius: 7px;
@@ -43,7 +44,7 @@ const LabelButton = styled.button`
 `;
 const MilestoneButton = styled.button`
   padding: 7px 15px;
-  border-color: #868e96;
+  border: 1px solid #ced4da;
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
   color: #343a40;

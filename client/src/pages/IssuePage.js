@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { fetchIssues } from '../api';
 import IssueFilterContainer from '../components/IssuePage/IssueFilterContainer';
+import IssueListContainer from '../components/IssuePage/IssueListContainer';
 
 const IssuePage = () => {
+  const [issueList, setIssueList] = useState([]);
   useEffect(() => {
     const fetch = async () => {
       const data = await fetchIssues();
@@ -17,6 +19,7 @@ const IssuePage = () => {
   return (
     <div>
       <IssueFilterContainer />
+      <IssueListContainer issueList={issueList} />
     </div>
   );
 };
