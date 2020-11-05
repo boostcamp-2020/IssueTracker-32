@@ -28,7 +28,7 @@ const IssueItem = (props) => {
   const id = props.issue.id;
   const isOpen = props.issue.isOpen;
   const title = props.issue.title;
-  const subText = makeSubText('dummyText');
+  const subText = makeSubText(props.issue.user.github_id);
   return (
     <ItemContainer>
       <TitleWrapper>
