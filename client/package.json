@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --open",
+    "mock": "cross-env MOCK=true NODE_ENV=development webpack-dev-server --progress --open",
     "build": "cross-env NODE_ENV=production webpack --progress"
   },
   "keywords": [],
