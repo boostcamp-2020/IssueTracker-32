@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) =>
     {
       nickname: {
         type: DataTypes.STRING(20),
-        allowNull: false,
       },
       email: {
         type: DataTypes.STRING(50),
@@ -14,6 +13,7 @@ module.exports = (sequelize, DataTypes) =>
       },
       github_id: {
         type: DataTypes.STRING(50),
+        allowNull: false,
       },
       profile_img_url: {
         type: DataTypes.STRING(255),
