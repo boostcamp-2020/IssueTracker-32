@@ -46,9 +46,10 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ template: './public/index.html' }),
     new webpack.DefinePlugin({
-      MOCK_BASE: JSON.stringify('http://localhost:8000'),
       API_BASE:
-        process.env.NODE_ENV === 'development'
+        process.env.MOCK === 'true' && process.env.NODE_ENV === 'development'
+          ? JSON.stringify('http://localhost:8000/mock/api')
+          : process.env.NODE_ENV === 'development'
           ? JSON.stringify('http://localhost:3000')
           : JSON.stringify('http://101.101.217.169/api'),
     }),

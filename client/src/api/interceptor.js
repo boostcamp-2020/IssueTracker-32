@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-function createAxiosInstance(useMock) {
+function createAxiosInstance() {
   const instance = axios.create({
-    baseURL: useMock ? MOCK_BASE : API_BASE,
+    baseURL: API_BASE,
     timeout: 10 * 1000,
   });
 
@@ -32,6 +32,5 @@ function createAxiosInstance(useMock) {
   return instance;
 }
 
-const useMock = false; // 목업 API 사용 시 true 로 설정하세요!
-const instance = createAxiosInstance(useMock);
+const instance = createAxiosInstance();
 export default instance;
