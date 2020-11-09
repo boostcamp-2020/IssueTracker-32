@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 exports.verifyToken = (req, res, next) => {
-  const bearerHeader = req.get('Authorization') || '';
-  const token = bearerHeader.split(' ')[1];
+  const token = req.get('Authorization') || '';
   jwt.verify(token, process.env.JWT_SECRET_KEY, (err, data) => {
     if (err) {
       res.sendStatus(401);
