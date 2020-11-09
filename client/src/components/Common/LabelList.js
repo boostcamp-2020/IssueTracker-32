@@ -4,6 +4,8 @@ import LabelItem from './LabelItem';
 
 const LabelListContainer = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const LabelList = (props) => {
