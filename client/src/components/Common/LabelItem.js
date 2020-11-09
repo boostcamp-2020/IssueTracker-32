@@ -5,13 +5,14 @@ const ItemWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0px 5px;
+  margin: 0px 3px;
   border-radius: 20px;
   background-color: ${(props) => props.colorStyle.backgroundColor};
 `;
 
 const NameText = styled.p`
-  font-weight: 600;
+  padding: 2px 5px;
+  font-weight: 500;
 `;
 
 const LabelItem = (props) => {
