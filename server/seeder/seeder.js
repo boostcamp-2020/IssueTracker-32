@@ -13,7 +13,7 @@ module.exports = async () => {
         }
     ]);
 
-    await User.bulkCreate([
+    const users = await User.bulkCreate([
         {
             nickname: "JuHy",
             github_id: "JuHyeon-Lee",
@@ -23,7 +23,12 @@ module.exports = async () => {
             nickname: "HangRae-Jo",
             github_id: "meinewq",
             profile_img_url: "https://avatars1.githubusercontent.com/u/24909656?v=4"
-        }
+        },
+        {
+            nickname: "SeungJin-Woo",
+            github_id: "woo123",
+            profile_img_url: "https://avatars1.githubusercontent.com/u/24909656?v=4"
+        },
     ]);
 
     const label_api = await Label.create({
@@ -56,4 +61,10 @@ module.exports = async () => {
     await issue_test1.addLabel(label_feature);
     await issue_test2.addLabel(label_api);
 
+    await issue_test1.addAssignees(users[0]);
+    await issue_test1.addAssignees(users[1]);
+    await issue_test1.addAssignees(users[2]);
+
+    await issue_test2.addAssignees(users[1]);
+    await issue_test2.addAssignees(users[2]);
 }
