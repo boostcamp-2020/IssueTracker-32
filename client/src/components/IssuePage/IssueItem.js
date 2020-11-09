@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import LabelList from '../Common/LabelList';
 
 const ItemContainer = styled.div`
   display: flex;
@@ -28,11 +29,13 @@ const IssueItem = (props) => {
   const id = props.issue.id;
   const isOpen = props.issue.isOpen;
   const title = props.issue.title;
+  const labelList = props.issue.labels;
   const subText = makeSubText(props.issue.user.github_id);
   return (
     <ItemContainer>
       <TitleWrapper>
         <TitleText> {title} </TitleText>
+        <LabelList labelList={labelList} />
       </TitleWrapper>
       <SubWrapper>
         <SubText> {subText} </SubText>
