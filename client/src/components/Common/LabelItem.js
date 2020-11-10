@@ -12,6 +12,7 @@ const ItemWrapper = styled.div`
 
 const NameText = styled.p`
   padding: 2px 5px;
+  font-size: 12px;
   font-weight: 500;
   color: ${(props) => makeTextColor(props.colorStyle.backgroundColor)};
 `;
