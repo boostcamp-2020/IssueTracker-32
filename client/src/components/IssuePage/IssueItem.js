@@ -77,7 +77,6 @@ const makeSubText = (issueId, isOpen, pastTime, githubId) => {
 };
 
 const IssueItem = (props) => {
-  console.log(props.issue);
   const id = props.issue.id;
   const isOpen = props.issue.is_open;
   const updatedTime = props.issue.updatedAt;
