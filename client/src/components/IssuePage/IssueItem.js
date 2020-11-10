@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import LabelList from '../Common/LabelList';
+import MilestoneItem from '../Common/MilestoneItem';
 import { GoIssueOpened, GoIssueClosed } from 'react-icons/go';
 
 import TimeAgo from 'javascript-time-ago';
@@ -13,22 +14,31 @@ const ItemContainer = styled.div`
 
 const CheckBoxContainer = styled.div`
   display: flex;
-  padding: 2px 10px;
+  padding: 8px;
 `;
 
 const IconContainer = styled.div`
   display: flex;
-  padding: 2px 10px;
+  padding: 8px;
 `;
 
 const IssueIcon = (props) => {
   const isOpen = props.isOpen;
-  return isOpen === true ? <GoIssueOpened /> : <GoIssueClosed />;
+  return isOpen === true ? (
+    <div style={{ color: 'green' }}>
+      <GoIssueOpened />
+    </div>
+  ) : (
+    <div style={{ color: 'red' }}>
+      <GoIssueClosed />
+    </div>
+  );
 };
 
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 8px;
 `;
 
 const TitleWrapper = styled.div`
@@ -37,14 +47,19 @@ const TitleWrapper = styled.div`
 `;
 
 const SubWrapper = styled.div`
+  margin: 4px 0px 0px;
   display: flex;
   align-items: center;
 `;
 
 const TitleText = styled.p`
   font-weight: 600;
+  font-size: 16px;
 `;
-const SubText = styled.p``;
+const SubText = styled.p`
+  color: #868e96;
+  font-size: 12px;
+`;
 
 // time setting
 
@@ -69,6 +84,7 @@ const IssueItem = (props) => {
   const title = props.issue.title;
   const labelList = props.issue.labels;
   const githubId = props.issue.user.github_id;
+  const milestone = props.issue.milestone;
   const subText = makeSubText(id, isOpen, updatedTime, githubId);
   return (
     <ItemContainer>
@@ -83,6 +99,7 @@ const IssueItem = (props) => {
         </TitleWrapper>
         <SubWrapper>
           <SubText> {subText} </SubText>
+          <MilestoneItem milestone={milestone} />
         </SubWrapper>
       </MainContainer>
     </ItemContainer>
