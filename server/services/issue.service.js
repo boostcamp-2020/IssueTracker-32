@@ -66,7 +66,7 @@ exports.getIssueListByFilter = async (condition) => {
   if (labels !== undefined){
     where['$labels.id$'] = labels
   }
-  if (labels !== undefined){
+  if (assignees !== undefined){
     where['$assignees.id$'] = assignees
   }
   const result = await Issue.findAll({
