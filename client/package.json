@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.21.0",
     "cross-env": "^7.0.2",
+    "javascript-time-ago": "^2.3.2",
     "query-string": "^6.13.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
