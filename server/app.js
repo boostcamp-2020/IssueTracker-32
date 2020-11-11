@@ -18,6 +18,9 @@ const passportConfig = require('./configs/passportConfig');
 passportConfig.config(passport);
 app.use(passport.initialize());
 
+app.use(express.json()); 
+app.use(express.urlencoded( {extended : false } ));
+
 const index = require('./routes/index');
 app.use('/', index);
 
