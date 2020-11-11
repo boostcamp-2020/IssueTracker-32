@@ -6,6 +6,8 @@ import SaveJWTPage from './SaveJWTPage';
 import NavigationBar from '@components/Common/NavigationBar';
 import Footer from '@components/Common/Footer';
 import styled from 'styled-components';
+import GlobalStyle from '../components/Common/GlobalStyle';
+import NewIssuePage from './NewIssuePage';
 
 const RouteWrapper = styled.div`
   margin-top: 100px;
@@ -15,12 +17,14 @@ const RouteWrapper = styled.div`
 const App = () => {
   return (
     <>
+      <GlobalStyle />
       <NavigationBar />
       <RouteWrapper>
         <Switch>
           <Route path="/" exact component={IssuePage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/social" component={SaveJWTPage} />
+          <Route path="/newissue" component={NewIssuePage} />
         </Switch>
       </RouteWrapper>
       <Footer />

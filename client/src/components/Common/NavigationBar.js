@@ -18,6 +18,7 @@ const NavTitle = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 25px;
   margin-left: 30px;
   font-size: 2rem;
   font-weight: 600;
