@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { fetchIssues } from '@api';
 import IssueFilterContainer from '@IssuePage/IssueFilterContainer';
 import IssueListContainer from '@IssuePage/IssueListContainer';
+import { FilterProvider } from '@context/FilterContext';
 
 const IssuePage = () => {
   const [issueList, setIssueList] = useState([]);
@@ -19,10 +20,10 @@ const IssuePage = () => {
   }, []);
 
   return (
-    <div>
+    <FilterProvider>
       <IssueFilterContainer />
       <IssueListContainer issueList={issueList} />
-    </div>
+    </FilterProvider>
   );
 };
 

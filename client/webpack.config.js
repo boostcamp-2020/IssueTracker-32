@@ -23,6 +23,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx'],
     alias: {
       '@api': path.resolve(__dirname, 'src/api'),
+      '@context': path.resolve(__dirname, 'src/context'),
       '@Common': path.resolve(__dirname, 'src/components/Common'),
       '@IssuePage': path.resolve(__dirname, 'src/components/IssuePage'),
       '@NewIssuePage': path.resolve(__dirname, 'src/components/NewIssuePage'),

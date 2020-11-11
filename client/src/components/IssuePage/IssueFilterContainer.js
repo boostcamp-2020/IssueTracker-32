@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { fetchLabelsCount, fetchMilestonesCount } from '@api';
+import { FilterContext } from '@context/FilterContext';
 import { GoTriangleDown, GoTag, GoMilestone } from 'react-icons/go';
 
 const FilterContainer = styled.div`
@@ -89,6 +90,8 @@ const CountText = styled.p`
 `;
 
 const IssueFilterContainer = () => {
+  const filterContext = useContext(FilterContext);
+
   const [labelsCount, setLabelsCount] = useState(0);
   const [milestonesCount, setMilestonesCount] = useState(0);
 
@@ -117,7 +120,7 @@ const IssueFilterContainer = () => {
           <ButtonText>Filter</ButtonText>
           <GoTriangleDown />
         </FilterButtonWrapper>
-        <FilterTextInput />
+        <FilterTextInput placeholder={filterContext.filterString} />
       </FilterWrapper>
       <ButtonWrapper>
         <LabelButtonWrapper>
