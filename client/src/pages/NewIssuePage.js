@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { fetchIssues } from '../api';
-
-import CommentFormContainer from '../components/NewIssuePage/CommentFormContainer';
-import Sidebar from '../components/NewIssuePage/Sidebar';
+import CommentFormContainer from '@NewIssuePage/CommentFormContainer';
+import Sidebar from '@NewIssuePage/Sidebar';
 
 const IssuePage = styled.div`
   display: flex;

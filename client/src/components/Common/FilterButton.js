@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { GoTriangleDown } from 'react-icons/go';
 import Modal from 'react-modal';
-import ModalContainer from './ModalContainer';
+import ModalContainer from '@Common/ModalContainer';
 
 const FilterButtonWrapper = styled.div`
   display: flex;

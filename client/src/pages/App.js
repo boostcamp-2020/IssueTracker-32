@@ -1,13 +1,13 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import IssuePage from './IssuePage';
-import LoginPage from './LoginPage';
-import SaveJWTPage from './SaveJWTPage';
-import NavigationBar from '@components/Common/NavigationBar';
-import Footer from '@components/Common/Footer';
+import IssuePage from '@pages/IssuePage';
+import LoginPage from '@pages/LoginPage';
+import SaveJWTPage from '@pages/SaveJWTPage';
+import NewIssuePage from '@pages/NewIssuePage';
+import NavigationBar from '@Common/NavigationBar';
+import Footer from '@Common/Footer';
 import styled from 'styled-components';
-import GlobalStyle from '../components/Common/GlobalStyle';
-import NewIssuePage from './NewIssuePage';
+import GlobalStyle from '@Common/GlobalStyle';
 
 const RouteWrapper = styled.div`
   margin-top: 100px;
