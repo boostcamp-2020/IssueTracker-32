@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import LabelList from '../Common/LabelList';
-import MilestoneItem from '../Common/MilestoneItem';
+import LabelList from '@Common/LabelList';
+import MilestoneItem from '@Common/MilestoneItem';
 import { GoIssueOpened, GoIssueClosed } from 'react-icons/go';
 
 import TimeAgo from 'javascript-time-ago';
@@ -82,7 +82,7 @@ const IssueItem = (props) => {
   const updatedTime = props.issue.updatedAt;
   const title = props.issue.title;
   const labelList = props.issue.labels;
-  const githubId = props.issue.user.github_id;
+  const githubId = props.issue.Author.github_id;
   const milestone = props.issue.milestone;
   const subText = makeSubText(id, isOpen, updatedTime, githubId);
   return (
