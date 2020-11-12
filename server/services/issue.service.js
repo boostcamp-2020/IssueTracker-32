@@ -71,20 +71,6 @@ exports.getIssueListByFilter = async (condition) => {
     where2['id'] = assignee
   }
 
-  Issue.addScope('hasParticularTag',
-  {
-    attributes: ['id'],
-    include: [
-      {
-        model: Label,
-        attributes: ['id', 'name', 'color'],
-        through: {
-          attributes: []
-        },
-        where: {id: 1}
-      }]    
-  });  
-
   const result = await Issue.findAll({
     where: where1,
     include: [
