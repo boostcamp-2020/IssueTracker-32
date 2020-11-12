@@ -11,4 +11,6 @@ const fetchMilestonesCount = () => instance.get('/milestone/count');
 
 const fetchIssuesCount = () => instance.get('/issue/count');
 
-export { fetchIssues, fetchIssuesCount, fetchLabelsCount, fetchMilestonesCount };
+const fetchIssueDetail = (issueId) => instance.get(`/issue/${issueId}`);
+
+export { fetchIssues, fetchIssuesCount, fetchLabelsCount, fetchMilestonesCount, fetchIssueDetail };
