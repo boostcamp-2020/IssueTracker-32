@@ -13,6 +13,8 @@ const fetchLabels = () => instance.get('/label');
 
 const fetchLabelsCount = () => instance.get('/label/count');
 
+const fetchMilestones = () => instance.get('/milestone');
+
 const fetchMilestonesCount = () => instance.get('/milestone/count');
 
 const fetchIssues = () => instance.get('/issue');
@@ -26,7 +28,7 @@ const fetchIssuesWithData = (data) =>
     params: {
       is_open: transformBoolToInt(data.isOpen),
       author_id: data.author,
-      labels: data.labels,
+      label: data.label,
       milestone_id: data.milestone,
       assiginee: data.assiginee,
     },
@@ -36,6 +38,7 @@ export {
   fetchUsers,
   fetchLabels,
   fetchLabelsCount,
+  fetchMilestones,
   fetchMilestonesCount,
   fetchIssues,
   fetchIssueDetail,

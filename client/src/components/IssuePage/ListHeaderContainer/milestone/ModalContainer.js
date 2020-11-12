@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ModalList from './ModalList';
-import { fetchUsers } from '@api';
+import { fetchMilestones } from '@api';
 import { useFetch } from '@hooks';
 import CancelFilterButton from './CancelFilterButton';
 
@@ -38,10 +38,10 @@ const ModalFilterInputBox = styled.input`
 `;
 
 const ModalContainer = (props) => {
-  const [userList, setUserList] = useFetch([], fetchUsers);
+  const [milestoneList, setMilestoneList] = useFetch([], fetchMilestones);
 
-  const headerText = 'Filter by author';
-  const placeHolder = 'Filter users';
+  const headerText = 'Filter by milestone';
+  const placeHolder = 'Filter milestone';
   const closeModal = props.closeModal;
   return (
     <ModalWrapper>
@@ -53,7 +53,7 @@ const ModalContainer = (props) => {
         <ModalFilterInputBox placeholder={placeHolder} />
       </ModalFilterWrapper>
       <CancelFilterButton />
-      <ModalList dataList={userList} />
+      <ModalList dataList={milestoneList} />
     </ModalWrapper>
   );
 };
