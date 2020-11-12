@@ -163,7 +163,7 @@ exports.getDetailIssue = async (id) => {
       {
         model: User,
         as: 'Author',
-        attributes: ['id', 'github_id'],
+        attributes: ['id', 'github_id', 'profile_img_url'],
       },
       {
         model: User,
@@ -186,10 +186,14 @@ exports.getDetailIssue = async (id) => {
       },
       {
         model: Comment,
+        include: [{
+          model: User,
+          attributes: ['id', 'github_id', 'profile_img_url'],
+        }],
         attributes: ['id', 'mandatory', 'detail','created_at', 'updated_at'],
         order: [['created_at', 'DESC']]
       },
     ]
   });
   return result;
-};
+}
