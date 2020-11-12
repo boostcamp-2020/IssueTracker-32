@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ModalList from './ModalList';
 import { fetchUsers } from '@api';
 import { useFetch } from '@hooks';
+import CancelFilterButton from './CancelFilterButton';
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -51,6 +52,7 @@ const ModalContainer = (props) => {
       <ModalFilterWrapper>
         <ModalFilterInputBox placeholder={placeHolder} />
       </ModalFilterWrapper>
+      <CancelFilterButton />
       <ModalList dataList={userList} />
     </ModalWrapper>
   );
