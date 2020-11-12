@@ -26,7 +26,7 @@ const App = () => {
           <Route path="/login" component={LoginPage} />
           <Route path="/social" component={SaveJWTPage} />
           <Route path="/newissue" component={NewIssuePage} />
-          <Route path="/issuedetail" component={IssueDetailPage} />
+          <Route path="/issuedetail/:issueId" component={IssueDetailPage} />
         </Switch>
       </RouteWrapper>
       <Footer />
