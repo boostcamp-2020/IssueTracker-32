@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import LabelItem from './LabelItem';
+import LabelItem from '@Common/LabelItem';
 
 const LabelListContainer = styled.div`
   display: flex;

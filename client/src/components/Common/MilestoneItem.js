@@ -17,11 +17,10 @@ const NameText = styled.p`
 
 const MilestoneItem = (props) => {
   const milestone = props.milestone;
-  const name = props.milestone.title;
-  return milestone !== undefined ? (
+  return milestone != undefined ? (
     <ItemWrapper>
       <GoMilestone size={12} />
-      <NameText> {name} </NameText>
+      <NameText> {milestone.title} </NameText>
     </ItemWrapper>
   ) : (
     <></>

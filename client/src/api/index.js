@@ -5,4 +5,10 @@ import axios from 'axios';
 
 const fetchIssues = () => instance.get('/issue');
 
-export { fetchIssues };
+const fetchLabelsCount = () => instance.get('/label/count');
+
+const fetchMilestonesCount = () => instance.get('/milestone/count');
+
+const fetchIssuesCount = () => instance.get('/issue/count');
+
+export { fetchIssues, fetchIssuesCount, fetchLabelsCount, fetchMilestonesCount };

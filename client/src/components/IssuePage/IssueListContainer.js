@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import IssueListHeader from './IssueListHeader';
-import IssueList from './IssueList';
+import IssueListHeader from '@IssuePage/IssueListHeader';
+import IssueList from '@IssuePage/IssueList';
 
 const ListContainer = styled.div`
   display: flex;
