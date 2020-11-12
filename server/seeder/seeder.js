@@ -20,9 +20,9 @@ module.exports = async () => {
             profile_img_url: "https://avatars1.githubusercontent.com/u/24909656?v=4"
         },
         {
-            nickname: "HangRae-Jo",
-            github_id: "meinewq",
-            profile_img_url: "https://avatars1.githubusercontent.com/u/24909656?v=4"
+            github_id: "HangraeCho",
+            nickname: null,
+            profile_img_url: "https://avatars0.githubusercontent.com/u/59906285?v=4"
         },
         {
             nickname: "SeungJin-Woo",
@@ -47,21 +47,21 @@ module.exports = async () => {
         is_open: 1,
         title: 'test issue 1',
         milestone_id: 1,
-        author_id: 1
+        author_id: 1,
     });
 
     const issue_test2 = await Issue.create({
         is_open: 1,
         title: 'test issue 2',
         milestone_id: 2,
-        author_id: 2
+        author_id: 2,
     })
 
     const issue_test3 = await Issue.create({
         is_open: 0,
         title: 'test issue 3',
         milestone_id: 2,
-        author_id: 3
+        author_id: 3,
     })
 
     const comment1 = await Comment.create({

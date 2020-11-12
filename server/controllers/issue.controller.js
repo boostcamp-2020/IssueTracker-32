@@ -1,4 +1,5 @@
 const issueService = require('../services/issue.service');
+const commentService = require('../services/comment.service');
 
 exports.getIssueList = async (req, res) => {
     const condition = req.query
@@ -14,10 +15,24 @@ exports.getIssueList = async (req, res) => {
 
 
 exports.createIssue = async (req, res) => {
-    console.log(req)
-    const values = req.body
-    const result = await issueService.createIssue(values);
-    res.json(result);
+    const userId = req.userId
+    console.log(userId)
+    console.log(req.body)
+    const {title, detail} = req.body
+    const issueValues = {
+        title,
+        author_id: userId,
+        is_open: 1,
+    }
+    const commentValues = {
+        detail,
+        user_id: userId,
+        mandatory: 1,
+    }
+
+    const result1 = await issueService.createIssue(issueValues);
+    const result2 = await commentService.createComment(commentValues);
+    res.json({msg: 'success'});
 }
 
 exports.updateIssue = async (req, res) => {

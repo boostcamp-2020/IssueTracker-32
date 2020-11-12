@@ -44,45 +44,47 @@ exports.getIssueList = async () => {
 };
 
 exports.getIssueListByFilter = async (condition) => {
-  const { id, is_open, milestone_id, author_id, title, labels, assignee } = condition;
+  const { is_open, milestone, author, title, label, assignee } = condition;
   const where1 = {}
   const where2 = {}
-  if (id !== undefined){
-    where1['id'] = id
-  }
+  const where3 = {}
+  const where4 = {}
+
   if (is_open !== undefined){
     where1['is_open'] = is_open
   }
-  if (milestone_id !== undefined){
-    where1['milestone_id'] = milestone_id
+  if (milestone !== undefined){
+    where4['title'] = milestone
   }
-  if (author_id !== undefined){
-    where1['author_id'] = author_id
+  if (author !== undefined){
+    where2['github_id'] = author
   }
   if (title !== undefined){
     where1['title'] = {
       [Op.like]: `%${title}%`
     }
   }
-  if (labels !== undefined){
-    where1['$labels.id$'] = labels
-  }
+  // if (label !== undefined){
+  //   where1['$label.id$'] = labels
+  // }
   if (assignee !== undefined){
-    where2['id'] = assignee
+    where3['github_id'] = assignee
   }
 
   const result = await Issue.findAll({
+    attributes: ['id', 'is_open', 'title', 'created_at', 'updated_at'],
     where: where1,
     include: [
       {
         model: User,
         as: 'Author',
+        where: where2,
         attributes: ['id', 'github_id'],
       },
       {
         model: User,
         as: 'Assignees',
-        where: where2,
+        where: where3,
         attributes: [],
         through: {
           attributes: [],
@@ -90,7 +92,8 @@ exports.getIssueListByFilter = async (condition) => {
       },
       {
         model: Milestone,
-        attributes: ['title'],
+        where: where4,
+        attributes: ['id', 'title'],
       },
       {
         model: Label,
@@ -99,13 +102,30 @@ exports.getIssueListByFilter = async (condition) => {
           attributes: [],
         },
       },
+      // {
+      //   model: Issue,
+      //   as: 'selfJoin',
+      //   attributes: ['id'],
+      //   include: [
+      //     {
+      //       model: Label,
+      //       where: {'name': 'API'},
+      //       attributes: ['id', 'name', 'color'],
+      //       through: {
+      //         attributes: [],
+      //       },
+      //     },
+      //   ],
+      // }
     ],
     order: [['created_at', 'DESC']],
   });
   return result;
 };
 
+
 exports.createIssue = async (values) => {
+  console.log(values)
   const result = await Issue.create(values);
   return result;
 };
