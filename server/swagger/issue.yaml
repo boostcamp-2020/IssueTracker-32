@@ -1,0 +1,168 @@
+paths:
+  /issue:
+    get:
+      tags:
+        - issues
+      summary: list issues
+      description: 
+        이슈 목록 필터
+      produces:
+        - "application/json"
+
+      parameters:
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: 포함된 제목의 이슈 검색
+        - in: query
+          name: is_open
+          schema:
+            type: boolean
+          description: open 1, close 0
+        - in: query
+          name: author_id
+          schema:
+            type: integer
+          description: 작성자 아이디
+        - in: query
+          name: milestone_id
+          schema:
+            type: integer
+          description: 마일스톤 아이디
+        # - in: query
+        #   name: labels
+        #   schema:
+        #     type: array
+        #     items: 
+        #       type: integer
+        #   description: label 목록
+        - in: query
+          name: assignees
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: false
+          description: assignee 목록
+      responses:
+        200:
+          description: OK
+          
+    post:
+      tags:
+        - issues
+      summary: "Add a new issue to the Issue"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Issue name that needs to be added to the Issues"
+          required: true
+          schema:
+            $ref: "#/definitions/Issue"
+      responses:
+        200:
+          description: OK
+        405:
+          description: "Invalid input"
+
+  /issue/{issue_id}:
+    get:
+      tags:
+        - issues
+      summary: "Find issue by ID"
+      description: "Returns a issue pet"
+      operationId: "getIssueById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "issue_id"
+        in: "path"
+        description: "ID of issue to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Issue not found"
+    put:
+      tags:
+        - issues
+      summary: "Update an existing issue"
+      description: ""
+      operationId: "updateIssue"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "issue_id"
+        in: "path"
+        description: "ID of issue to update"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Issue object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Issue"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Issue not found"
+        405:
+          description: "Validation exception"
+    delete:
+      tags:
+        - issues
+      summary: "Deletes a issue"
+      description: ""
+      operationId: "deleteIssue"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "issue_id"
+        in: "path"
+        description: "ID of issue to be deleted"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Issue not found"
+
+definitions:
+  Issue:
+    type: "object"
+    required:
+    - "title"
+    - "is_open"
+    - "author_id"
+    properties:
+      title:
+        type: "string"
+        example: "이슈 제목"
+      is_open:
+        type: "boolean"
+        description: "open:1, close: 0"
+      author_id:
+        type: "integer"
+        example: 1
+      milestone_id:
+        type: "integer"
+        example: 1

@@ -17,13 +17,14 @@ exports.createMilestone = async (req, res) => {
 }
 
 exports.updateMilestone = async (req, res) => {
-	const {id, ...values} = req.body
+	const id = req.params.id
+	const values = req.body
 	const result = await milestoneService.updateMilestone(id, values);
 	res.json({msg: 'success'});
 }
 
 exports.deleteMilestone = async (req, res) => {
-	const {id} = req.body
+	const id = req.params.id
 	const result = await milestoneService.deleteMilestone(id);
 	res.json({msg: 'success'});
 }

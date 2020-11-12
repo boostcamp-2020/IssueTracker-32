@@ -17,13 +17,14 @@ exports.createLabel = async (req, res) => {
 }
 
 exports.updateLabel = async (req, res) => {
-	const {id, ...values} = req.body
+	const id = req.params.id
+	const values = req.body
 	const result = await labelService.updateLabel(id, values);
 	res.json({msg: 'success'});
 }
 
 exports.deleteLabel = async (req, res) => {
-	const {id} = req.body
+	const id = req.params.id
 	const result = await labelService.deleteLabel(id);
 	res.json({msg: 'success'});
 }

@@ -111,6 +111,6 @@ module.exports = async () => {
     await issue_test2.addAssignees(users[1]);
     await issue_test2.addAssignees(users[2]);
 
+    await issue_test3.addAssignees(users[0]);
     await issue_test3.addAssignees(users[2]);
-    await issue_test3.addAssignees(users[3]);
 }
