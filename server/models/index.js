@@ -47,4 +47,11 @@ db.Issue.belongsToMany(db.User, { through: 'IssueAssignee', as: 'Assignees' });
 db.Issue.belongsToMany(db.Label, { through: 'IssueLabel' });
 db.Label.belongsToMany(db.Issue, { through: 'IssueLabel' });
 
+
+// db.Issue.hasOne(db.Issue, {
+//   foreignKey: 'self_id',
+//   as: 'selfJoin'
+// });
+
+
 module.exports = db;
