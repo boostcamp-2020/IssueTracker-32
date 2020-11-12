@@ -9,10 +9,16 @@ const CommentTitle = styled.p`
   font-size: 40px;
 `
 
-const IssueDetailHeader = () => {
+const IssueDetailHeader = (props) => {
+  const issueData = props.issueData;
+
   return (
     <Header>
-      <CommentTitle>[UI] Issue 상세정보 조회 페이지 구현</CommentTitle>
+      <CommentTitle>
+        {
+          issueData ? issueData.title : null
+        }
+      </CommentTitle>
     </Header>
   );
 };

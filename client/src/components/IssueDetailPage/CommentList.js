@@ -9,9 +9,17 @@ const List = styled.div`
 `;
 
 const CommentList = (props) => {
+  const issueData = props.issueData;
+
   return (
     <List>
-      <CommentListItem />
+      { 
+        issueData
+          ? issueData.comments.map((comment, i) => {
+            return (<CommentListItem comment={comment}/>)
+          })
+          : (null)
+      } 
       <CommentForm />
     </List>
   );

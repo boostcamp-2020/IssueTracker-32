@@ -15,6 +15,8 @@ const fetchMilestonesCount = () => instance.get('/milestone/count');
 
 const fetchIssuesCount = () => instance.get('/issue/count');
 
+const fetchIssueDetail = (issueId) => instance.get(`/issue/${issueId}`);
+
 const fetchUsers = () => instance.get('/user');
 
 const fetchIssuesWithData = (data) =>
@@ -33,6 +35,7 @@ export {
   fetchIssuesCount,
   fetchLabelsCount,
   fetchMilestonesCount,
+  fetchIssueDetail,
   fetchUsers,
   fetchIssuesWithData,
 };
