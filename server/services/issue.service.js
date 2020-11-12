@@ -44,33 +44,35 @@ exports.getIssueList = async () => {
 };
 
 exports.getIssueListByFilter = async (condition) => {
-  const { id, is_open, milestone_id, author_id, title, labels, assignees } = condition;
-  const where = {}
+  const { id, is_open, milestone_id, author_id, title, labels, assignee } = condition;
+  const where1 = {}
+  const where2 = {}
   if (id !== undefined){
-    where['id'] = id
+    where1['id'] = id
   }
   if (is_open !== undefined){
-    where['is_open'] = is_open
+    where1['is_open'] = is_open
   }
   if (milestone_id !== undefined){
-    where['milestone_id'] = milestone_id
+    where1['milestone_id'] = milestone_id
   }
   if (author_id !== undefined){
-    where['author_id'] = author_id
+    where1['author_id'] = author_id
   }
   if (title !== undefined){
-    where['title'] = {
+    where1['title'] = {
       [Op.like]: `%${title}%`
     }
   }
   if (labels !== undefined){
-    where['$labels.id$'] = labels
+    where1['$labels.id$'] = labels
   }
-  if (assignees !== undefined){
-    where['$assignees.id$'] = assignees
+  if (assignee !== undefined){
+    where2['id'] = assignee
   }
+
   const result = await Issue.findAll({
-    where,
+    where: where1,
     include: [
       {
         model: User,
@@ -80,7 +82,8 @@ exports.getIssueListByFilter = async (condition) => {
       {
         model: User,
         as: 'Assignees',
-        attributes: ['id', 'github_id'],
+        where: where2,
+        attributes: [],
         through: {
           attributes: [],
         },
@@ -146,7 +149,7 @@ exports.getDetailIssue = async (id) => {
       {
         model: User,
         as: 'Author',
-        attributes: ['id', 'github_id'],
+        attributes: ['id', 'github_id', 'profile_img_url'],
       },
       {
         model: User,
@@ -169,10 +172,14 @@ exports.getDetailIssue = async (id) => {
       },
       {
         model: Comment,
+        include: [{
+          model: User,
+          attributes: ['id', 'github_id', 'profile_img_url'],
+        }],
         attributes: ['id', 'mandatory', 'detail','created_at', 'updated_at'],
         order: [['created_at', 'DESC']]
       },
     ]
   });
   return result;
-};
+}

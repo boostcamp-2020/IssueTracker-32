@@ -23,7 +23,7 @@ const FilterButton = (props) => {
   const [topLocation, setTopLocation] = useState(0);
   const [rightLocation, setRightLocation] = useState(0);
 
-  const name = props.name;
+  const name = 'Author';
 
   const openModal = () => {
     setIsOpen(true);
