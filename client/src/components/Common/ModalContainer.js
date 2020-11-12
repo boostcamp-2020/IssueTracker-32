@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import ModalList from './ModalList';
+import ModalList from '@Common/ModalList';
 
 const ModalWrapper = styled.div`
   display: flex;
