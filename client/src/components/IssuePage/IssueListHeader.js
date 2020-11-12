@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import FilterButton from '../Common/FilterButton';
+import AuthorFilterButton from '@IssuePage/ListHeaderContainer/author/FilterButton';
+// import LabelFilterButton from '@IssuePage/ListHeaderContainer/label/FilterButton';
+// import ProjectFilterButton from '@IssuePage/ListHeaderContainer/project/FilterButton';
+// import MilestoneFilterButton from '@IssuePage/ListHeaderContainer/milestone/FilterButton';
+// import AssigneeFilterButton from '@IssuePage/ListHeaderContainer/assignee/FilterButton';
+
 import { fetchIssuesCount } from '@api';
 import { GoIssueOpened, GoCheck } from 'react-icons/go';
 
@@ -61,11 +66,11 @@ const IssueListHeader = (props) => {
         </ClosedCountWrapper>
       </IssueCountWrapper>
       <FilterButtonListWrapper>
-        <FilterButton name="Author" />
-        <FilterButton name="Label" />
-        <FilterButton name="Projects" />
-        <FilterButton name="Milestones" />
-        <FilterButton name="Assignee" />
+        <AuthorFilterButton />
+        {/* <LabelFilterButton />
+        <ProjectFilterButton />
+        <MilestoneFilterButton />
+        <AssigneeFilterButton /> */}
       </FilterButtonListWrapper>
     </ListHeaderContainer>
   );

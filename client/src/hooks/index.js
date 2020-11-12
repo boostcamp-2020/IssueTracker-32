@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const useLocalStorage = (key, initialValue) => {
   const [value, setValue] = useState(() => window.localStorage.getItem(key) || initialValue);
@@ -11,4 +11,19 @@ const useLocalStorage = (key, initialValue) => {
   return [value, setLocalStorageValue];
 };
 
-export { useLocalStorage };
+const useFetch = (asyncFunc) => {
+  const [data, setData] = useState(null);
+
+  const fetchData = async () => {
+    const { data } = await asyncFunc();
+    setData(data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return [data, setData];
+};
+
+export { useLocalStorage, useFetch };
