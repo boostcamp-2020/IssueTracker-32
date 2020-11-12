@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import LabelList from '@Common/LabelList';
-import MilestoneItem from '@Common/MilestoneItem';
-import { GoIssueOpened, GoIssueClosed } from 'react-icons/go';
-
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import { Link } from 'react-router-dom';
+import { GoIssueOpened, GoIssueClosed } from 'react-icons/go';
+import LabelList from '@Common/LabelList';
+import MilestoneItem from '@Common/MilestoneItem';
 
 const ItemContainer = styled.div`
   display: flex;
@@ -52,10 +52,6 @@ const SubWrapper = styled.div`
   align-items: center;
 `;
 
-const TitleText = styled.p`
-  font-weight: 600;
-  font-size: 16px;
-`;
 const SubText = styled.p`
   color: #868e96;
   font-size: 12px;
@@ -85,6 +81,13 @@ const IssueItem = (props) => {
   const githubId = props.issue.Author.github_id;
   const milestone = props.issue.milestone;
   const subText = makeSubText(id, isOpen, updatedTime, githubId);
+
+  const titleStyle = {
+    color: 'black',
+    fontWeight: '600',
+    fontSize: '16px',
+    textDecoration: 'none',
+  };
   return (
     <ItemContainer>
       <CheckBoxContainer></CheckBoxContainer>
@@ -93,7 +96,9 @@ const IssueItem = (props) => {
       </IconContainer>
       <MainContainer>
         <TitleWrapper>
-          <TitleText> {title} </TitleText>
+          <Link style={titleStyle} to={`/issuedetail/${id}`}>
+            {title}
+          </Link>
           <LabelList labelList={labelList} />
         </TitleWrapper>
         <SubWrapper>

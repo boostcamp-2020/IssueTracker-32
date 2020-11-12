@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { fetchLabelsCount, fetchMilestonesCount } from '@api';
 import { FilterContext } from '@context/FilterContext';
 import { GoTriangleDown, GoTag, GoMilestone } from 'react-icons/go';
@@ -68,15 +69,6 @@ const ButtonText = styled.p`
   margin: 0px 5px;
 `;
 
-const NewIssueButton = styled.button`
-  padding: 5px 16px;
-  border: none;
-  border-radius: 7px;
-  background-color: #2ea44f;
-  color: white;
-  font-weight: 600;
-`;
-
 const CountWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -95,6 +87,18 @@ const IssueFilterContainer = () => {
 
   const [labelsCount, setLabelsCount] = useFetch(0, fetchLabelsCount);
   const [milestonesCount, setMilestonesCount] = useFetch(0, fetchMilestonesCount);
+
+  const newIssueButtonStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '5px 16px',
+    border: 'none',
+    borderRadius: '7px',
+    backgroundColor: '#2ea44f',
+    color: 'white',
+    fontWeight: '600',
+    textDecoration: 'none',
+  };
 
   useEffect(() => {}, []);
 
@@ -123,7 +127,9 @@ const IssueFilterContainer = () => {
           </CountWrapper>
         </MilestoneButtonWrapper>
       </ButtonWrapper>
-      <NewIssueButton> New issue </NewIssueButton>
+      <Link style={newIssueButtonStyle} to="/newissue">
+        New issue
+      </Link>
     </FilterContainer>
   );
 };
