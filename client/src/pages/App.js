@@ -8,6 +8,7 @@ import Footer from '@components/Common/Footer';
 import styled from 'styled-components';
 import GlobalStyle from '../components/Common/GlobalStyle';
 import NewIssuePage from './NewIssuePage';
+import IssueDetailPage from './IssueDetailPage';
 
 const RouteWrapper = styled.div`
   margin-top: 100px;
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/login" component={LoginPage} />
           <Route path="/social" component={SaveJWTPage} />
           <Route path="/newissue" component={NewIssuePage} />
+          <Route path="/issuedetail" component={IssueDetailPage} />
         </Switch>
       </RouteWrapper>
       <Footer />
