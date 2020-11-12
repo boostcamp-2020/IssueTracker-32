@@ -32,10 +32,12 @@ const ModalFilterWrapper = styled.div`
   padding: 6px;
 `;
 
-const ModalFilterInputBox = styled.input``;
+const ModalFilterInputBox = styled.input`
+  width: 230px;
+`;
 
 const ModalContainer = (props) => {
-  const [userList, setUserList] = useFetch(fetchUsers);
+  const [userList, setUserList] = useFetch([], fetchUsers);
 
   const headerText = 'Filter by author';
   const placeHolder = 'Filter users';

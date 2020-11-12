@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import AuthorFilterButton from '@IssuePage/ListHeaderContainer/author/FilterButton';
 // import LabelFilterButton from '@IssuePage/ListHeaderContainer/label/FilterButton';
-// import ProjectFilterButton from '@IssuePage/ListHeaderContainer/project/FilterButton';
 // import MilestoneFilterButton from '@IssuePage/ListHeaderContainer/milestone/FilterButton';
 // import AssigneeFilterButton from '@IssuePage/ListHeaderContainer/assignee/FilterButton';
-
 import { fetchIssuesCount } from '@api';
+import { FilterContext } from '@context/FilterContext';
 import { GoIssueOpened, GoCheck } from 'react-icons/go';
 
 const ListHeaderContainer = styled.div`
@@ -39,14 +38,24 @@ const CountText = styled.p`
   margin: 0px 0px 0px 5px;
 `;
 const IssueListHeader = (props) => {
+  const filterContext = useContext(FilterContext);
+
   const [openCount, setOpenCount] = useState(0);
   const [closedCount, setClosedCount] = useState(0);
 
   const fetchAndSetIssuesCount = async () => {
     const { data } = await fetchIssuesCount();
-    const { open, close } = data.data;
+    const { open, close } = data;
     setOpenCount(open);
     setClosedCount(close);
+  };
+
+  const clickOpenIssue = () => {
+    filterContext.setIsOpen(true);
+  };
+
+  const clickClosedIssue = () => {
+    filterContext.setIsOpen(false);
   };
 
   useEffect(() => {
@@ -56,11 +65,11 @@ const IssueListHeader = (props) => {
   return (
     <ListHeaderContainer>
       <IssueCountWrapper>
-        <OpenCountWrapper>
+        <OpenCountWrapper onClick={clickOpenIssue}>
           <GoIssueOpened />
           <CountText> {openCount} Open </CountText>
         </OpenCountWrapper>
-        <ClosedCountWrapper>
+        <ClosedCountWrapper onClick={clickClosedIssue}>
           <GoCheck />
           <CountText> {closedCount} Closed </CountText>
         </ClosedCountWrapper>
@@ -68,7 +77,6 @@ const IssueListHeader = (props) => {
       <FilterButtonListWrapper>
         <AuthorFilterButton />
         {/* <LabelFilterButton />
-        <ProjectFilterButton />
         <MilestoneFilterButton />
         <AssigneeFilterButton /> */}
       </FilterButtonListWrapper>
