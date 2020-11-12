@@ -16,9 +16,17 @@ const ListContainer = styled.div`
 
 const IssueListContainer = (props) => {
   const filterContext = useContext(FilterContext);
-  console.log(filterContext);
   const [issueList, setIssueList] = useFetchWithParams([], fetchIssuesWithData, filterContext);
-  console.log(issueList);
+
+  const updateIssuesData = async () => {
+    const { data } = await fetchIssuesWithData(filterContext);
+    setIssueList(data);
+  };
+
+  useEffect(() => {
+    updateIssuesData();
+  }, [filterContext.filterString]);
+
   return (
     <ListContainer>
       <IssueListHeader />
