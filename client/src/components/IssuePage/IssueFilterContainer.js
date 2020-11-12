@@ -100,6 +100,12 @@ const IssueFilterContainer = () => {
     textDecoration: 'none',
   };
 
+  const labelButtonStyle = {
+    color: '#343a40',
+    margin: '0px 5px',
+    textDecoration: 'none',
+  }
+
   useEffect(() => {}, []);
 
   return (
@@ -114,7 +120,9 @@ const IssueFilterContainer = () => {
       <ButtonWrapper>
         <LabelButtonWrapper>
           <GoTag />
-          <ButtonText>Labels</ButtonText>
+          <Link style={labelButtonStyle} to="/label">
+            Labels
+          </Link>
           <CountWrapper>
             <CountText> {labelsCount} </CountText>
           </CountWrapper>
