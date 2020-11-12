@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import ModalItem from '@Common/ModalItem';
+import ModalItem from './ModalItem';
 
 const ModalListContainer = styled.div`
   display: flex;
