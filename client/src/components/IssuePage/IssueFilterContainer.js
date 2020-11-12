@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import { fetchLabelsCount, fetchMilestonesCount } from '@api';
+import { FilterContext } from '@context/FilterContext';
 import { GoTriangleDown, GoTag, GoMilestone } from 'react-icons/go';
 
 const FilterContainer = styled.div`
@@ -46,7 +48,6 @@ const LabelButtonWrapper = styled.div`
   border-right: none;
   border-top-left-radius: 7px;
   border-bottom-left-radius: 7px;
-  background-color: #dee2e6;
   font-weight: 600;
 `;
 
@@ -58,7 +59,6 @@ const MilestoneButtonWrapper = styled.div`
   border: 1px solid #ced4da;
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
-  background-color: #dee2e6;
   font-weight: 600;
 `;
 
@@ -76,7 +76,43 @@ const NewIssueButton = styled.button`
   font-weight: 600;
 `;
 
+const CountWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #dee2e6;
+  padding: 2px 7px;
+  border-radius: 10px;
+`;
+
+const CountText = styled.p`
+  font-size: 12px;
+`;
+
 const IssueFilterContainer = () => {
+  const filterContext = useContext(FilterContext);
+
+  const [labelsCount, setLabelsCount] = useState(0);
+  const [milestonesCount, setMilestonesCount] = useState(0);
+
+  const fetchAandSetLabelsCount = async () => {
+    const { data } = await fetchLabelsCount();
+    const fetchedCount = data.data;
+    setLabelsCount(fetchedCount);
+  };
+
+  const fetchAandSetMilestonesCount = async () => {
+    const { data } = await fetchMilestonesCount();
+    const fetchedCount = data.data;
+    setMilestonesCount(fetchedCount);
+    return;
+  };
+
+  useEffect(() => {
+    fetchAandSetLabelsCount();
+    fetchAandSetMilestonesCount();
+  }, []);
+
   return (
     <FilterContainer>
       <FilterWrapper>
@@ -84,16 +120,22 @@ const IssueFilterContainer = () => {
           <ButtonText>Filter</ButtonText>
           <GoTriangleDown />
         </FilterButtonWrapper>
-        <FilterTextInput />
+        <FilterTextInput placeholder={filterContext.filterString} />
       </FilterWrapper>
       <ButtonWrapper>
         <LabelButtonWrapper>
           <GoTag />
           <ButtonText>Labels</ButtonText>
+          <CountWrapper>
+            <CountText> {labelsCount} </CountText>
+          </CountWrapper>
         </LabelButtonWrapper>
         <MilestoneButtonWrapper>
           <GoMilestone />
           <ButtonText>Milestones</ButtonText>
+          <CountWrapper>
+            <CountText> {milestonesCount} </CountText>
+          </CountWrapper>
         </MilestoneButtonWrapper>
       </ButtonWrapper>
       <NewIssueButton> New issue </NewIssueButton>

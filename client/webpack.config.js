@@ -22,7 +22,11 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx'],
     alias: {
-      '@components': path.resolve(__dirname, 'src/components/'),
+      '@api': path.resolve(__dirname, 'src/api'),
+      '@context': path.resolve(__dirname, 'src/context'),
+      '@Common': path.resolve(__dirname, 'src/components/Common'),
+      '@IssuePage': path.resolve(__dirname, 'src/components/IssuePage'),
+      '@NewIssuePage': path.resolve(__dirname, 'src/components/NewIssuePage'),
       '@pages': path.resolve(__dirname, 'src/pages/'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
     },

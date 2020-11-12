@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import IssueItem from './IssueItem';
+import IssueItem from '@IssuePage/IssueItem';
 
 const IssueList = (props) => {
   const issueList = props.issueList;
