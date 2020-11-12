@@ -18,7 +18,7 @@ const IssueDetailPage = ({ match }) => {
 
   const fetchIssueData = async () => {
     const { data } = await fetchIssueDetail(issueId);
-    const fetchedIssueData = data.data[0];
+    const fetchedIssueData = data[0];
     setIssueData(fetchedIssueData);
     return;
   };

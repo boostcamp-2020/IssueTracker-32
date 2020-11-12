@@ -44,7 +44,7 @@ const CommentListItem = (props) => {
     <CommentItem>
       <CommentProfileImg/>
       <CommentBody>
-        <CommentInfo>{makeSubText('AUTHOR', comment.created_at)}</CommentInfo>
+        <CommentInfo>{makeSubText(comment.user.github_id, comment.created_at)}</CommentInfo>
         <CommentDetail>
             <p>{comment.detail}</p>
         </CommentDetail>
