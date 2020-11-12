@@ -4,6 +4,7 @@ import IssuePage from '@pages/IssuePage';
 import LoginPage from '@pages/LoginPage';
 import SaveJWTPage from '@pages/SaveJWTPage';
 import NewIssuePage from '@pages/NewIssuePage';
+import IssueDetailPage from '@pages/IssueDetailPage';
 import NavigationBar from '@Common/NavigationBar';
 import Footer from '@Common/Footer';
 import styled from 'styled-components';
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/login" component={LoginPage} />
           <Route path="/social" component={SaveJWTPage} />
           <Route path="/newissue" component={NewIssuePage} />
+          <Route path="/issuedetail" component={IssueDetailPage} />
         </Switch>
       </RouteWrapper>
       <Footer />
