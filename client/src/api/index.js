@@ -27,9 +27,9 @@ const fetchIssuesWithData = (data) =>
   instance.get('/issue', {
     params: {
       is_open: transformBoolToInt(data.isOpen),
-      author_id: data.author,
+      author: data.author,
       label: data.label,
-      milestone_id: data.milestone,
+      milestone: data.milestone,
       assiginee: data.assiginee,
     },
   });
@@ -43,5 +43,5 @@ export {
   fetchIssues,
   fetchIssueDetail,
   fetchIssuesCount,
-  fetchIssuesWithData
+  fetchIssuesWithData,
 };

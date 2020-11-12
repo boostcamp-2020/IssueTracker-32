@@ -29,13 +29,13 @@ const SubText = styled.p`
 const ModalItem = (props) => {
   const filterContext = useContext(FilterContext);
 
-  const userId = props.data.id;
+  const id = props.data.id;
   const githubId = props.data.github_id;
   const nickname = props.data.nickname;
   const profileImageURL = props.data.profile_img_url;
 
   const selectUser = () => {
-    filterContext.setAssignee(userId);
+    filterContext.setAssignee(githubId);
   };
 
   return (
