@@ -7,11 +7,21 @@ const transformBoolToInt = (boolean) => {
   return boolean === true ? 1 : 0;
 };
 
+const fetchUsers = () => instance.get('/user');
+
+const fetchLabels = () => instance.get('/label');
+
+const fetchLabelsCount = () => instance.get('/label/count');
+
+const fetchMilestones = () => instance.get('/milestone');
+
+const fetchMilestonesCount = () => instance.get('/milestone/count');
+
 const fetchIssues = () => instance.get('/issue');
 
-const fetchIssuesCount = () => instance.get('/issue/count');
-
 const fetchIssueDetail = (issueId) => instance.get(`/issue/${issueId}`);
+
+const fetchIssuesCount = () => instance.get('/issue/count');
 
 const fetchIssuesWithData = (data) =>
   instance.get('/issue', {
@@ -24,24 +34,14 @@ const fetchIssuesWithData = (data) =>
     },
   });
 
-const fetchLabels = () => instance.get('/label');
-
-const fetchLabelsCount = () => instance.get('/label/count');
-
-const fetchMilestones = () => instance.get('/milestone');
-
-const fetchMilestonesCount = () => instance.get('/milestone/count');
-
-const fetchUsers = () => instance.get('/user');
-
 export {
-  fetchIssues,
-  fetchIssuesCount,
-  fetchIssueDetail,
-  fetchIssuesWithData,
+  fetchUsers,
   fetchLabels,
   fetchLabelsCount,
   fetchMilestones,
   fetchMilestonesCount,
-  fetchUsers,
+  fetchIssues,
+  fetchIssueDetail,
+  fetchIssuesCount,
+  fetchIssuesWithData
 };
