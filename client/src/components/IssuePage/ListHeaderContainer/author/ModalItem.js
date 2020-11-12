@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import { FilterContext } from '@context/FilterContext';
 
 const ItemWrapper = styled.div`
   display: flex;
@@ -9,26 +10,36 @@ const ItemWrapper = styled.div`
 `;
 
 const ImgWrapper = styled.img`
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   border-radius: 14px;
 `;
 
 const NameText = styled.p`
+  margin: 0px 0px 0px 10px;
   font-weight: 500;
 `;
 
 const SubText = styled.p`
-  font-weight: 500;
+  margin: 0px 0px 0px 10px;
+  font-size: 12px;
+  color: #868e96;
 `;
 
 const ModalItem = (props) => {
+  const filterContext = useContext(FilterContext);
+
+  const userId = props.data.id;
   const githubId = props.data.github_id;
   const nickname = props.data.nickname;
   const profileImageURL = props.data.profile_img_url;
 
+  const selectUser = () => {
+    filterContext.setAuthor(userId);
+  };
+
   return (
-    <ItemWrapper>
+    <ItemWrapper onClick={selectUser}>
       <ImgWrapper src={profileImageURL} />
       <NameText> {githubId} </NameText>
       <SubText> {nickname} </SubText>
