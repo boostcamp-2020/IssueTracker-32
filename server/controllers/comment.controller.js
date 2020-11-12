@@ -3,7 +3,7 @@ const commentService = require('../services/comment.service');
 exports.createComment = async (req, res) => {
     const values = req.body
     const result = await commentService.createComment(values);
-    res.json({data: result});
+    res.json(result);
 }
 
 exports.updateComment = async (req, res) => {
