@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
 
 import CommentProfileImg from '../NewIssuePage/CommentProfileImg';
 
@@ -25,14 +27,26 @@ const CommentDetail = styled.div`
   padding: 10px;
 `;
 
-const CommentListItem = () => {
+const timeAgo = new TimeAgo('en-US');
+
+const makeSubText = (github_id, created_at) => {
+  const createdDate = new Date(created_at);
+  const timeString = timeAgo.format(createdDate, 'round');
+  const githubString = github_id;
+  const subText = `${githubString} commented ${timeString}`;
+  return subText;
+};
+
+const CommentListItem = (props) => {
+  const comment = props.comment;
+
   return (
     <CommentItem>
       <CommentProfileImg/>
       <CommentBody>
-        <CommentInfo>JuHyeon-Lee commented 2 days ago</CommentInfo>
+        <CommentInfo>{makeSubText('AUTHOR', comment.created_at)}</CommentInfo>
         <CommentDetail>
-            <p>UI 구현</p>
+            <p>{comment.detail}</p>
         </CommentDetail>
       </CommentBody>
     </CommentItem>

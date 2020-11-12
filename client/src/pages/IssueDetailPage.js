@@ -14,7 +14,7 @@ const DetailPage = styled.div`
 const IssueDetailPage = ({ match }) => {
   const { issueId } = match.params;
 
-  const [issueData, setIssueData] = useState([]);
+  const [issueData, setIssueData] = useState();
 
   const fetchIssueData = async () => {
     const { data } = await fetchIssueDetail(issueId);

@@ -14,7 +14,11 @@ const IssueDetailHeader = (props) => {
 
   return (
     <Header>
-      <CommentTitle>{issueData.title}</CommentTitle>
+      <CommentTitle>
+        {
+          issueData ? issueData.title : null
+        }
+      </CommentTitle>
     </Header>
   );
 };

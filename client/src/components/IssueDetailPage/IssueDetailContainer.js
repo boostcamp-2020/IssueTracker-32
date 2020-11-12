@@ -8,11 +8,13 @@ const Container = styled.div`
   display: flex;
 `;
 
-const IssueDetailContainer = () => {
+const IssueDetailContainer = (props) => {
+  const issueData = props.issueData;
+
   return (
     <Container>
-      <CommentList/>
-      <IssueDetailSidebar/>
+      <CommentList issueData={issueData}/>
+      <IssueDetailSidebar issueData={issueData}/>
     </Container>
   );
 };
