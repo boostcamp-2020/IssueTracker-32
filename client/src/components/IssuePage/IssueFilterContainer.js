@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { fetchLabelsCount, fetchMilestonesCount } from '@api';
 import { FilterContext } from '@context/FilterContext';
 import { GoTriangleDown, GoTag, GoMilestone } from 'react-icons/go';
+import { useFetch } from '@hooks';
 
 const FilterContainer = styled.div`
   display: flex;
@@ -92,26 +93,10 @@ const CountText = styled.p`
 const IssueFilterContainer = () => {
   const filterContext = useContext(FilterContext);
 
-  const [labelsCount, setLabelsCount] = useState(0);
-  const [milestonesCount, setMilestonesCount] = useState(0);
+  const [labelsCount, setLabelsCount] = useFetch(0, fetchLabelsCount);
+  const [milestonesCount, setMilestonesCount] = useFetch(0, fetchMilestonesCount);
 
-  const fetchAandSetLabelsCount = async () => {
-    const { data } = await fetchLabelsCount();
-    const fetchedCount = data.data;
-    setLabelsCount(fetchedCount);
-  };
-
-  const fetchAandSetMilestonesCount = async () => {
-    const { data } = await fetchMilestonesCount();
-    const fetchedCount = data.data;
-    setMilestonesCount(fetchedCount);
-    return;
-  };
-
-  useEffect(() => {
-    fetchAandSetLabelsCount();
-    fetchAandSetMilestonesCount();
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <FilterContainer>
