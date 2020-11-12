@@ -6,8 +6,9 @@ const labelController = require('../controllers/label.controller');
 
 router.get('/', authService.verifyToken, labelController.getLabelList);
 router.post('/', authService.verifyToken, labelController.createLabel)
-router.put('/', authService.verifyToken, labelController.updateLabel)
-router.delete('/', authService.verifyToken, labelController.deleteLabel)
+
+router.put('/:id', authService.verifyToken, labelController.updateLabel)
+router.delete('/:id', authService.verifyToken, labelController.deleteLabel)
 
 router.get('/count', authService.verifyToken, labelController.getLabelCount);
 

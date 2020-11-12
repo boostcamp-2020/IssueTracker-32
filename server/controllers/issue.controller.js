@@ -21,13 +21,14 @@ exports.createIssue = async (req, res) => {
 }
 
 exports.updateIssue = async (req, res) => {
-    const {id, ...values} = req.body
+    const id = req.params.id
+    const values = req.body
     const result = await issueService.updateIssue(id, values);
     res.json({msg: 'success'});
 }
 
 exports.deleteIssue = async (req, res) => {
-    const {id} = req.body
+    const id = req.params.id
     const result = await issueService.deleteIssue(id);
     res.json({result: 'success'});
 }
