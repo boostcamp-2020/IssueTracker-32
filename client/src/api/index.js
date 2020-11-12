@@ -9,33 +9,39 @@ const transformBoolToInt = (boolean) => {
 
 const fetchIssues = () => instance.get('/issue');
 
-const fetchLabelsCount = () => instance.get('/label/count');
-
-const fetchMilestonesCount = () => instance.get('/milestone/count');
-
 const fetchIssuesCount = () => instance.get('/issue/count');
 
 const fetchIssueDetail = (issueId) => instance.get(`/issue/${issueId}`);
-
-const fetchUsers = () => instance.get('/user');
 
 const fetchIssuesWithData = (data) =>
   instance.get('/issue', {
     params: {
       is_open: transformBoolToInt(data.isOpen),
       author_id: data.author,
-      labels: data.labels,
+      label: data.label,
       milestone_id: data.milestone,
       assiginee: data.assiginee,
     },
   });
 
+const fetchLabels = () => instance.get('/label');
+
+const fetchLabelsCount = () => instance.get('/label/count');
+
+const fetchMilestones = () => instance.get('/milestone');
+
+const fetchMilestonesCount = () => instance.get('/milestone/count');
+
+const fetchUsers = () => instance.get('/user');
+
 export {
   fetchIssues,
   fetchIssuesCount,
-  fetchLabelsCount,
-  fetchMilestonesCount,
   fetchIssueDetail,
-  fetchUsers,
   fetchIssuesWithData,
+  fetchLabels,
+  fetchLabelsCount,
+  fetchMilestones,
+  fetchMilestonesCount,
+  fetchUsers,
 };

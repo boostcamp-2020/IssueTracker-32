@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import AuthorFilterButton from '@IssuePage/ListHeaderContainer/author/FilterButton';
-// import LabelFilterButton from '@IssuePage/ListHeaderContainer/label/FilterButton';
-// import MilestoneFilterButton from '@IssuePage/ListHeaderContainer/milestone/FilterButton';
-// import AssigneeFilterButton from '@IssuePage/ListHeaderContainer/assignee/FilterButton';
+import LabelFilterButton from '@IssuePage/ListHeaderContainer/label/FilterButton';
+import MilestoneFilterButton from '@IssuePage/ListHeaderContainer/milestone/FilterButton';
+import AssigneeFilterButton from '@IssuePage/ListHeaderContainer/assignee/FilterButton';
 import { fetchIssuesCount } from '@api';
 import { FilterContext } from '@context/FilterContext';
 import { GoIssueOpened, GoCheck } from 'react-icons/go';
@@ -76,9 +76,9 @@ const IssueListHeader = (props) => {
       </IssueCountWrapper>
       <FilterButtonListWrapper>
         <AuthorFilterButton />
-        {/* <LabelFilterButton />
+        <LabelFilterButton />
         <MilestoneFilterButton />
-        <AssigneeFilterButton /> */}
+        <AssigneeFilterButton />
       </FilterButtonListWrapper>
     </ListHeaderContainer>
   );

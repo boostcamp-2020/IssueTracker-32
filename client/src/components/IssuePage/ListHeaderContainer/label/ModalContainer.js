@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ModalList from './ModalList';
-import { fetchUsers } from '@api';
+import { fetchLabels } from '@api';
 import { useFetch } from '@hooks';
 import CancelFilterButton from './CancelFilterButton';
 
@@ -38,10 +38,10 @@ const ModalFilterInputBox = styled.input`
 `;
 
 const ModalContainer = (props) => {
-  const [userList, setUserList] = useFetch([], fetchUsers);
+  const [labelList, setLabelList] = useFetch([], fetchLabels);
 
-  const headerText = 'Filter by author';
-  const placeHolder = 'Filter users';
+  const headerText = 'Filter by Label';
+  const placeHolder = 'Filter Label';
   const closeModal = props.closeModal;
   return (
     <ModalWrapper>
@@ -53,7 +53,7 @@ const ModalContainer = (props) => {
         <ModalFilterInputBox placeholder={placeHolder} />
       </ModalFilterWrapper>
       <CancelFilterButton />
-      <ModalList dataList={userList} />
+      <ModalList dataList={labelList} />
     </ModalWrapper>
   );
 };
