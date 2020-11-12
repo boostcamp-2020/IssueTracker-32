@@ -11,8 +11,8 @@ const useLocalStorage = (key, initialValue) => {
   return [value, setLocalStorageValue];
 };
 
-const useFetch = (asyncFunc) => {
-  const [data, setData] = useState(null);
+const useFetch = (initialValue, asyncFunc) => {
+  const [data, setData] = useState(initialValue);
 
   const fetchData = async () => {
     const { data } = await asyncFunc();
@@ -26,4 +26,19 @@ const useFetch = (asyncFunc) => {
   return [data, setData];
 };
 
-export { useLocalStorage, useFetch };
+const useFetchWithParams = (initialValue, asyncFunc, params) => {
+  const [data, setData] = useState(initialValue);
+
+  const fetchDataWithParams = async () => {
+    const { data } = await asyncFunc(params);
+    setData(data);
+  };
+
+  useEffect(() => {
+    fetchDataWithParams();
+  }, []);
+
+  return [data, setData];
+};
+
+export { useLocalStorage, useFetch, useFetchWithParams };
