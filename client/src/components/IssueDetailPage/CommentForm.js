@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Redirect } from 'react-router-dom';
 
-import CommentProfileImg from '../NewIssuePage/CommentProfileImg';
+import { postComment } from '@api';
+import CommentProfileImg from '@NewIssuePage/CommentProfileImg';
 
 const CForm = styled.div`
   display: flex;
@@ -16,7 +18,7 @@ const CommentFormBody = styled.form`
   border-radius: 5px;
   overflow: hidden;
   padding: 10px;
-`
+`;
 
 const CommentDetail = styled.input`
   flex: 1;
@@ -34,13 +36,28 @@ const CommentSubmit = styled.button`
   font-weight: bold;
 `;
 
-const CommentForm = () => {
-  return (
+const CommentForm = ({ issueData }) => {
+  const issueId = issueData != null ? issueData.id : null;
+  const [redirect, setRedirect] = useState(false);
+  const [textInput, setTextInput] = useState('');
+
+  const submitComment = async () => {
+    const response = await postComment(issueId, textInput);
+    setRedirect(true);
+  };
+
+  return redirect ? (
+    <Redirect to={`/issuedetail/${issueId}`} />
+  ) : (
     <CForm>
-      <CommentProfileImg/>
+      <CommentProfileImg />
       <CommentFormBody>
-        <CommentDetail placeholder='Leave a comment'/>
-        <CommentSubmit>Submit New Issue</CommentSubmit>
+        <CommentDetail
+          value={textInput}
+          onChange={(e) => setTextInput(e.target.value)}
+          placeholder="Leave a comment"
+        />
+        <CommentSubmit onClick={submitComment}>Submit New Issue</CommentSubmit>
       </CommentFormBody>
     </CForm>
   );
