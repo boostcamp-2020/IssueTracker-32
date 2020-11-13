@@ -35,10 +35,16 @@ const fetchIssuesWithData = (data) =>
     },
   });
 
-const postNewIssue = (title, detail) => 
+const postNewIssue = (title, detail) =>
   instance.post('/issue', {
     title: title,
-    detail: detail
+    detail: detail,
+  });
+
+const postComment = (issueId, detail) =>
+  instance.post('/comment', {
+    issue_id: issueId,
+    detail: detail,
   });
 
 export {
@@ -52,4 +58,5 @@ export {
   fetchIssuesCount,
   fetchIssuesWithData,
   postNewIssue,
+  postComment,
 };
