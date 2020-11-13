@@ -2,6 +2,15 @@ const db = require('../models/index');
 const { Issue, User, Milestone, Label, Comment } = db;
 const { Op } = require("sequelize");
 
+const found = function(arr, st){
+  if (st.isArray){
+    return st.every( r=> arr.indexOf(r) >= 0)
+  }
+  else {
+    return arr.includes(st)
+  }
+}
+
 exports.getIssueList = async () => {
   try {
     const result = await Issue.findAll({
@@ -15,7 +24,7 @@ exports.getIssueList = async () => {
         {
           model: User,
           as: 'Assignees',
-          attributes: ['id', 'github_id'],
+          attributes: [],
           through: {
             attributes: [],
           },
@@ -46,27 +55,23 @@ exports.getIssueList = async () => {
 
 exports.getIssueListByFilter = async (condition) => {
   const { is_open, milestone, author, title, label, assignee } = condition;
-  const where1 = {}
-  const where2 = {}
-  const where3 = {}
-  const where4 = {}
-
+  const where = {}
   if (is_open !== undefined){
-    where1['is_open'] = parseInt(is_open)
+    where['is_open'] = parseInt(is_open)
   }
   if (milestone !== undefined){
-    where4['title'] = milestone
+    where['$milestone.title$'] = milestone
   }
   if (author !== undefined){
-    where2['github_id'] = author
+    where['$Author.github_id$'] = author
   }
   if (title !== undefined){
-    where1['title'] = {
+    where['title'] = {
       [Op.like]: `%${title}%`
     }
   }
   if (assignee !== undefined){
-    where3['github_id'] = assignee
+    where['$Assignees.github_id$'] = assignee
   }
   try {
     const result = await Issue.findAll({
@@ -75,21 +80,18 @@ exports.getIssueListByFilter = async (condition) => {
         {
           model: User,
           as: 'Author',
-          where: where2,
           attributes: ['id', 'github_id'],
         },
         {
           model: User,
           as: 'Assignees',
-          where: where3,
-          attributes: ['id', 'github_id'],
+          attributes: [],
           through: {
             attributes: [],
           },
         },
         {
           model: Milestone,
-          where: where4,
           attributes: ['id', 'title'],
         },
         {
@@ -100,33 +102,35 @@ exports.getIssueListByFilter = async (condition) => {
           },
         },
       ],
-      where: {
-        is_open: 1
-      },
+      where,
       order: [['created_at', 'DESC']],
     });
-    return result
+
+    if (label === undefined){
+      return result
+    }
+    else {
+      const filteredByLabel = result.reduce((acc,cur) => {
+        const label_name_list = cur.labels.reduce((acc,cur) => {
+          acc.push(cur.name)
+          return acc
+        },[])
+        if (found(label_name_list,label)){
+          acc.push(cur)
+        }
+        return acc
+      },[])
+      return filteredByLabel
+    }
   }
   catch(err) {
-    console.log(errr)
+    console.log(err)
   }
   
-  // if (label === undefined){
-  //   return result
-  // }
-  // else {
-  //   console.log(result)
-  //   const res = result.filter((issues) => (issues.labels).filter((label) => (label.id === label)))
-  //   console.log(res)
-  // }
+
+  
 };
 
-// function makeArr(labels){
-//   labels.reduce((pre,value) => {
-//     pre.push(value.id)
-//     return pre;
-//   )
-// }
 
 exports.createIssue = async (values) => {
   const result = await Issue.create(values);
