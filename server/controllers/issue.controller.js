@@ -16,8 +16,6 @@ exports.getIssueList = async (req, res) => {
 
 exports.createIssue = async (req, res) => {
     const userId = req.userId
-    console.log(userId)
-    console.log(req.body)
     const {title, detail} = req.body
     const issueValues = {
         title,
@@ -31,8 +29,12 @@ exports.createIssue = async (req, res) => {
     }
 
     const result1 = await issueService.createIssue(issueValues);
+    commentValues['issue_id'] =  result1.id
     const result2 = await commentService.createComment(commentValues);
-    res.json({msg: 'success'});
+    res.json({
+        msg: 'success',
+        id: result1.id
+    });
 }
 
 exports.updateIssue = async (req, res) => {
