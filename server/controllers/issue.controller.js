@@ -29,7 +29,7 @@ exports.createIssue = async (req, res) => {
     }
 
     const result1 = await issueService.createIssue(issueValues);
-    commentValues[issue_id] =  result1.id
+    commentValues['issue_id'] =  result1.id
     const result2 = await commentService.createComment(commentValues);
     res.json({
         msg: 'success',

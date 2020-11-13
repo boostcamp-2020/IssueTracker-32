@@ -68,44 +68,48 @@ exports.getIssueListByFilter = async (condition) => {
   if (assignee !== undefined){
     where3['github_id'] = assignee
   }
-
-  const result = await Issue.findAll({
-    attributes: ['id', 'is_open', 'title', 'created_at', 'updated_at'],
-    include: [
-      {
-        model: User,
-        as: 'Author',
-        where: where2,
-        attributes: ['id', 'github_id'],
-      },
-      {
-        model: User,
-        as: 'Assignees',
-        where: where3,
-        attributes: ['id', 'github_id'],
-        through: {
-          attributes: [],
+  try {
+    const result = await Issue.findAll({
+      attributes: ['id', 'is_open', 'title', 'created_at', 'updated_at'],
+      include: [
+        {
+          model: User,
+          as: 'Author',
+          where: where2,
+          attributes: ['id', 'github_id'],
         },
-      },
-      {
-        model: Milestone,
-        where: where4,
-        attributes: ['id', 'title'],
-      },
-      {
-        model: Label,
-        attributes: ['id', 'name', 'color'],
-        through: {
-          attributes: [],
+        {
+          model: User,
+          as: 'Assignees',
+          where: where3,
+          attributes: ['id', 'github_id'],
+          through: {
+            attributes: [],
+          },
         },
+        {
+          model: Milestone,
+          where: where4,
+          attributes: ['id', 'title'],
+        },
+        {
+          model: Label,
+          attributes: ['id', 'name', 'color'],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+      where: {
+        is_open: 1
       },
-    ],
-    where: {
-      is_open: 1
-    },
-    order: [['created_at', 'DESC']],
-  });
-  return result
+      order: [['created_at', 'DESC']],
+    });
+    return result
+  }
+  catch(err) {
+    console.log(errr)
+  }
   
   // if (label === undefined){
   //   return result
