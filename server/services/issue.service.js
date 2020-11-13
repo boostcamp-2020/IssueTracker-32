@@ -3,6 +3,7 @@ const { Issue, User, Milestone, Label, Comment } = db;
 const { Op } = require("sequelize");
 
 const found = function(arr, st){
+  console.log(arr,st)
   if (st.isArray){
     return st.every( r=> arr.indexOf(r) >= 0)
   }
@@ -115,6 +116,7 @@ exports.getIssueListByFilter = async (condition) => {
           acc.push(cur.name)
           return acc
         },[])
+        console.log(found(label_name_list,label))
         if (found(label_name_list,label)){
           acc.push(cur)
         }
