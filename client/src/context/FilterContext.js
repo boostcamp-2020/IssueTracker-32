@@ -30,8 +30,44 @@ export const FilterProvider = ({ children }) => {
     setIsDefault(true);
   };
 
+  const transStringToIsOpen = (value) => {
+    if (value === 'open') return true;
+    else if (value === 'closed') return false;
+    return null;
+  };
+
+  const clearState = () => {
+    setIsOpen(null);
+    setAuthor(null);
+    setLabel(null);
+    setMilestone(null);
+    setAssignee(null);
+  };
+
+  const checkElement = (element) => {
+    const [firstValue, secondValue] = element.split(':');
+    if (firstValue === 'is') setIsOpen(transStringToIsOpen(secondValue));
+    else if (firstValue === 'author') setAuthor(secondValue);
+    else if (firstValue === 'label') setLabel(secondValue);
+    else if (firstValue === 'milestone') setMilestone(secondValue);
+    else if (firstValue === 'assignee') setAssignee(secondValue);
+  };
+
+  const analysisQuery = (query) => {
+    const splitedQuery = query.split(' ');
+    clearState();
+    splitedQuery.forEach((element) => {
+      checkElement(element);
+    });
+  };
+
+  const makeIsOpenString = (isOpen) => {
+    if (isOpen == null) return '';
+    return isOpen === true ? 'is:open ' : 'is:closed ';
+  };
+
   const makeFilterString = (isOpen, author, label, milestone, assignee) => {
-    const isOpenString = isOpen === true ? 'is:open ' : 'is:closed ';
+    const isOpenString = makeIsOpenString(isOpen);
     const authorString = author == undefined ? '' : `author:${author} `;
     const labelString = label == undefined ? '' : `label:${label} `;
     const milestoneString = milestone == undefined ? '' : `milestone:${milestone} `;
@@ -47,6 +83,8 @@ export const FilterProvider = ({ children }) => {
     const newString = makeFilterString(isOpen, author, label, milestone, assignee);
     setFilterString(newString);
   }, [isOpen, author, label, milestone, assignee]);
+
+  useEffect(() => {}, [filterString]);
 
   return (
     <FilterContext.Provider
@@ -66,6 +104,7 @@ export const FilterProvider = ({ children }) => {
         assignee,
         setAssignee,
         makeDefault,
+        analysisQuery,
       }}
     >
       {children}

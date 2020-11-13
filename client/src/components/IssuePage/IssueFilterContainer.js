@@ -85,6 +85,8 @@ const CountText = styled.p`
 const IssueFilterContainer = () => {
   const filterContext = useContext(FilterContext);
 
+  const [textInput, setTextInput] = useState(filterContext.filterString);
+
   const [labelsCount, setLabelsCount] = useFetch(0, fetchLabelsCount);
   const [milestonesCount, setMilestonesCount] = useFetch(0, fetchMilestonesCount);
 
@@ -104,9 +106,17 @@ const IssueFilterContainer = () => {
     color: '#343a40',
     margin: '0px 5px',
     textDecoration: 'none',
-  }
+  };
 
-  useEffect(() => {}, []);
+  const enterEvent = (event) => {
+    if (event.key === 'Enter') {
+      filterContext.analysisQuery(textInput);
+    }
+  };
+
+  useEffect(() => {
+    setTextInput(filterContext.filterString);
+  }, [filterContext.filterString]);
 
   return (
     <FilterContainer>
@@ -115,7 +125,11 @@ const IssueFilterContainer = () => {
           <ButtonText>Filter</ButtonText>
           <GoTriangleDown />
         </FilterButtonWrapper>
-        <FilterTextInput placeholder={filterContext.filterString} />
+        <FilterTextInput
+          value={textInput}
+          onChange={(e) => setTextInput(e.target.value)}
+          onKeyDown={enterEvent}
+        />
       </FilterWrapper>
       <ButtonWrapper>
         <LabelButtonWrapper>

@@ -4,6 +4,7 @@ import axios from 'axios';
 // TODO: 나중에 api 요청 추가해주세요!
 
 const transformBoolToInt = (boolean) => {
+  if (boolean == null) return null;
   return boolean === true ? 1 : 0;
 };
 
@@ -27,10 +28,10 @@ const fetchIssuesWithData = (data) =>
   instance.get('/issue', {
     params: {
       is_open: transformBoolToInt(data.isOpen),
-      author_id: data.author,
+      author: data.author,
       label: data.label,
-      milestone_id: data.milestone,
-      assiginee: data.assiginee,
+      milestone: data.milestone,
+      assignee: data.assignee,
     },
   });
 
@@ -43,5 +44,5 @@ export {
   fetchIssues,
   fetchIssueDetail,
   fetchIssuesCount,
-  fetchIssuesWithData
+  fetchIssuesWithData,
 };

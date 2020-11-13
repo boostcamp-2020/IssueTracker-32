@@ -50,7 +50,7 @@ const ModalItem = (props) => {
   };
 
   const selectLabel = () => {
-    filterContext.setLabel(id);
+    filterContext.setLabel(name);
   };
 
   return (

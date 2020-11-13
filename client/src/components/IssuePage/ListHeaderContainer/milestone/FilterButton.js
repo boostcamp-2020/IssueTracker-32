@@ -18,7 +18,7 @@ const ButtonText = styled.p`
 `;
 
 const FilterButton = (props) => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const buttonElement = useRef(null);
   const [topLocation, setTopLocation] = useState(0);
   const [rightLocation, setRightLocation] = useState(0);
@@ -26,10 +26,10 @@ const FilterButton = (props) => {
   const name = 'Milestones';
 
   const openModal = () => {
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
 
   const setTopRightLocation = (bottom, right) => {

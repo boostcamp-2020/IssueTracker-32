@@ -20,7 +20,7 @@ const ModalItem = (props) => {
   const title = props.data.title;
 
   const selectMilestone = () => {
-    filterContext.setMilestone(id);
+    filterContext.setMilestone(title);
   };
 
   return (
