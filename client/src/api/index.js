@@ -31,7 +31,7 @@ const fetchIssuesWithData = (data) =>
       author: data.author,
       label: data.label,
       milestone: data.milestone,
-      assiginee: data.assiginee,
+      assignee: data.assignee,
     },
   });
 
