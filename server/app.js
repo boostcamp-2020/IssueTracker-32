@@ -18,6 +18,12 @@ const passportConfig = require('./configs/passportConfig');
 passportConfig.config(passport);
 app.use(passport.initialize());
 
+app.use(express.json()); 
+app.use(express.urlencoded( {extended : false } ));
+
+const logger = require('morgan');
+app.use(logger('dev'));
+
 const index = require('./routes/index');
 app.use('/', index);
 

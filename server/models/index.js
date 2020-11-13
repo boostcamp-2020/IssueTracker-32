@@ -36,15 +36,22 @@ db.Issue.hasMany(db.Comment, { foreignKey: 'issue_id' });
 db.Comment.belongsTo(db.Issue, { foreignKey: 'issue_id' });
 
 // 저자 이슈 1 : N
-db.User.hasMany(db.Issue, { foreignKey: 'author_id' });
-db.Issue.belongsTo(db.User, { foreignKey: 'author_id' });
+db.User.hasMany(db.Issue, { foreignKey: 'author_id', as: 'Author' });
+db.Issue.belongsTo(db.User, { foreignKey: 'author_id', as: 'Author' });
 
 // 어사이니 이슈 N:M
-db.User.belongsToMany(db.Issue, { through: 'IssueAssignee' });
-db.Issue.belongsToMany(db.User, { through: 'IssueAssignee' });
+db.User.belongsToMany(db.Issue, { through: 'IssueAssignee', as: 'Issues' });
+db.Issue.belongsToMany(db.User, { through: 'IssueAssignee', as: 'Assignees' });
 
 // 이슈 레이블 N:M
 db.Issue.belongsToMany(db.Label, { through: 'IssueLabel' });
 db.Label.belongsToMany(db.Issue, { through: 'IssueLabel' });
+
+
+// db.Issue.hasOne(db.Issue, {
+//   foreignKey: 'self_id',
+//   as: 'selfJoin'
+// });
+
 
 module.exports = db;

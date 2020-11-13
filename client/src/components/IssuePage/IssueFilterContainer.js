@@ -1,5 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { fetchLabelsCount, fetchMilestonesCount } from '@api';
+import { FilterContext } from '@context/FilterContext';
+import { GoTriangleDown, GoTag, GoMilestone } from 'react-icons/go';
+import { useFetch } from '@hooks';
 
 const FilterContainer = styled.div`
   display: flex;
@@ -12,13 +17,16 @@ const FilterWrapper = styled.div`
   display: flex;
   margin-right: 15px;
 `;
-const FilterButton = styled.button`
-  padding: 7px 15px;
+const FilterButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 16px;
   border: 1px solid #ced4da;
   border-right: none;
   border-top-left-radius: 7px;
   border-bottom-left-radius: 7px;
-  color: #343a40;
+  background-color: #dee2e6;
   font-weight: 600;
 `;
 const FilterTextInput = styled.input`
@@ -33,45 +41,117 @@ const ButtonWrapper = styled.div`
   display: flex;
   margin-right: 15px;
 `;
-const LabelButton = styled.button`
-  padding: 7px 15px;
+const LabelButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 16px;
   border: 1px solid #ced4da;
   border-right: none;
   border-top-left-radius: 7px;
   border-bottom-left-radius: 7px;
-  color: #343a40;
   font-weight: 600;
 `;
-const MilestoneButton = styled.button`
-  padding: 7px 15px;
+
+const MilestoneButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 16px;
   border: 1px solid #ced4da;
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
-  color: #343a40;
   font-weight: 600;
 `;
 
-const NewIssueButton = styled.button`
-  padding: 7px 15px;
-  border: none;
-  border-radius: 7px;
-  background-color: #2ea44f;
-  color: white;
-  font-weight: 600;
+const ButtonText = styled.p`
+  color: #343a40;
+  margin: 0px 5px;
+`;
+
+const CountWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #dee2e6;
+  padding: 2px 7px;
+  border-radius: 10px;
+`;
+
+const CountText = styled.p`
+  font-size: 12px;
 `;
 
 const IssueFilterContainer = () => {
+  const filterContext = useContext(FilterContext);
+
+  const [textInput, setTextInput] = useState(filterContext.filterString);
+
+  const [labelsCount, setLabelsCount] = useFetch(0, fetchLabelsCount);
+  const [milestonesCount, setMilestonesCount] = useFetch(0, fetchMilestonesCount);
+
+  const newIssueButtonStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '5px 16px',
+    border: 'none',
+    borderRadius: '7px',
+    backgroundColor: '#2ea44f',
+    color: 'white',
+    fontWeight: '600',
+    textDecoration: 'none',
+  };
+
+  const labelButtonStyle = {
+    color: '#343a40',
+    margin: '0px 5px',
+    textDecoration: 'none',
+  };
+
+  const enterEvent = (event) => {
+    if (event.key === 'Enter') {
+      filterContext.analysisQuery(textInput);
+    }
+  };
+
+  useEffect(() => {
+    setTextInput(filterContext.filterString);
+  }, [filterContext.filterString]);
+
   return (
     <FilterContainer>
       <FilterWrapper>
-        <FilterButton> Filter </FilterButton>
-        <FilterTextInput></FilterTextInput>
+        <FilterButtonWrapper>
+          <ButtonText>Filter</ButtonText>
+          <GoTriangleDown />
+        </FilterButtonWrapper>
+        <FilterTextInput
+          value={textInput}
+          onChange={(e) => setTextInput(e.target.value)}
+          onKeyDown={enterEvent}
+        />
       </FilterWrapper>
       <ButtonWrapper>
-        <LabelButton> Labels </LabelButton>
-        <MilestoneButton> Milestones </MilestoneButton>
+        <LabelButtonWrapper>
+          <GoTag />
+          <Link style={labelButtonStyle} to="/label">
+            Labels
+          </Link>
+          <CountWrapper>
+            <CountText> {labelsCount} </CountText>
+          </CountWrapper>
+        </LabelButtonWrapper>
+        <MilestoneButtonWrapper>
+          <GoMilestone />
+          <ButtonText>Milestones</ButtonText>
+          <CountWrapper>
+            <CountText> {milestonesCount} </CountText>
+          </CountWrapper>
+        </MilestoneButtonWrapper>
       </ButtonWrapper>
-      <NewIssueButton> New issue </NewIssueButton>
+      <Link style={newIssueButtonStyle} to="/newissue">
+        New issue
+      </Link>
     </FilterContainer>
   );
 };

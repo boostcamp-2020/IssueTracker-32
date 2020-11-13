@@ -7,7 +7,7 @@ exports.verifyToken = (req, res, next) => {
     if (err) {
       res.sendStatus(401);
     } else {
-      req.data = data;
+      req.userId = data.id;
       next();
     }
   });

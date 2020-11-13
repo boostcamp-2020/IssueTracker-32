@@ -1,26 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { fetchIssues } from '../api';
-import IssueFilterContainer from '../components/IssuePage/IssueFilterContainer';
-import IssueListContainer from '../components/IssuePage/IssueListContainer';
+import IssueFilterContainer from '@IssuePage/IssueFilterContainer';
+import IssueListContainer from '@IssuePage/IssueListContainer';
+import ClearFilterContainer from '@IssuePage/ClearFilterContainer';
+import { FilterProvider } from '@context/FilterContext';
 
 const IssuePage = () => {
-  const [issueList, setIssueList] = useState([]);
-  useEffect(() => {
-    const fetchIssueList = async () => {
-      const { data } = await fetchIssues();
-      const fetchedIssueList = data.data;
-      setIssueList(fetchedIssueList);
-      return;
-    };
-    fetchIssueList();
-  }, []);
-
   return (
-    <div>
+    <FilterProvider>
       <IssueFilterContainer />
-      <IssueListContainer issueList={issueList} />
-    </div>
+      <ClearFilterContainer />
+      <IssueListContainer />
+    </FilterProvider>
   );
 };
 

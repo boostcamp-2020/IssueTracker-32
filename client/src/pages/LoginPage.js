@@ -30,9 +30,11 @@ const LoginButton = styled.a`
   text-align: center;
   text-decoration: none;
   padding: 5px 40px;
+  margin: 0px 0px 50px 0px;
 `;
 
 const LoginTitle = styled.h1`
+  margin: 50px 0px 50px 0px;
   font-size: 3rem;
   font-weight: 700;
 `;
