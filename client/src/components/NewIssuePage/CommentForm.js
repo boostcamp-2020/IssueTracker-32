@@ -44,7 +44,6 @@ const CommentForm = (props) => {
 
   const submitNewIssue = async () => {
     const { title, detail } = newIssueContext;
-    console.log(title, detail);
     await postNewIssue(title, detail);
     setRedirect(true);
     return <Redirect to='/' />
