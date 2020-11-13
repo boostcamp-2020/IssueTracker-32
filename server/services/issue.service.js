@@ -5,6 +5,7 @@ const { Op } = require("sequelize");
 exports.getIssueList = async () => {
   try {
     const result = await Issue.findAll({
+      attributes: ['id', 'is_open', 'title', 'created_at', 'updated_at'],
       include: [
         {
           model: User,
@@ -21,7 +22,7 @@ exports.getIssueList = async () => {
         },
         {
           model: Milestone,
-          attributes: ['title'],
+          attributes: ['id','title'],
         },
         {
           model: Label,
@@ -51,7 +52,7 @@ exports.getIssueListByFilter = async (condition) => {
   const where4 = {}
 
   if (is_open !== undefined){
-    where1['is_open'] = is_open
+    where1['is_open'] = parseInt(is_open)
   }
   if (milestone !== undefined){
     where4['title'] = milestone
@@ -64,16 +65,12 @@ exports.getIssueListByFilter = async (condition) => {
       [Op.like]: `%${title}%`
     }
   }
-  // if (label !== undefined){
-  //   where1['$label.id$'] = labels
-  // }
   if (assignee !== undefined){
     where3['github_id'] = assignee
   }
 
   const result = await Issue.findAll({
     attributes: ['id', 'is_open', 'title', 'created_at', 'updated_at'],
-    where: where1,
     include: [
       {
         model: User,
@@ -85,7 +82,7 @@ exports.getIssueListByFilter = async (condition) => {
         model: User,
         as: 'Assignees',
         where: where3,
-        attributes: [],
+        attributes: ['id', 'github_id'],
         through: {
           attributes: [],
         },
@@ -102,30 +99,32 @@ exports.getIssueListByFilter = async (condition) => {
           attributes: [],
         },
       },
-      // {
-      //   model: Issue,
-      //   as: 'selfJoin',
-      //   attributes: ['id'],
-      //   include: [
-      //     {
-      //       model: Label,
-      //       where: {'name': 'API'},
-      //       attributes: ['id', 'name', 'color'],
-      //       through: {
-      //         attributes: [],
-      //       },
-      //     },
-      //   ],
-      // }
     ],
+    where: {
+      is_open: 1
+    },
     order: [['created_at', 'DESC']],
   });
-  return result;
+  return result
+  
+  // if (label === undefined){
+  //   return result
+  // }
+  // else {
+  //   console.log(result)
+  //   const res = result.filter((issues) => (issues.labels).filter((label) => (label.id === label)))
+  //   console.log(res)
+  // }
 };
 
+// function makeArr(labels){
+//   labels.reduce((pre,value) => {
+//     pre.push(value.id)
+//     return pre;
+//   )
+// }
 
 exports.createIssue = async (values) => {
-  console.log(values)
   const result = await Issue.create(values);
   return result;
 };

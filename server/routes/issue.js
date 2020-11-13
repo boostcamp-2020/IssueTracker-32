@@ -14,5 +14,4 @@ router.put('/:id', authService.verifyToken, issueController.updateIssue)
 router.delete(':id/', authService.verifyToken, issueController.deleteIssue)
 
 
-
 module.exports = router;
