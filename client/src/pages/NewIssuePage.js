@@ -2,18 +2,22 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CommentFormContainer from '@NewIssuePage/CommentFormContainer';
 import Sidebar from '@NewIssuePage/Sidebar';
+import { NewIssueProvider } from '@context/NewIssueContext';
 
-const IssuePage = styled.div`
+const NewIssueContainer = styled.div`
   display: flex;
   margin-bottom: 20px;
 `;
 
 const NewIssuePage = () => {
+
   return (
-    <IssuePage>
-      <CommentFormContainer />
-      <Sidebar></Sidebar>
-    </IssuePage>
+    <NewIssueProvider>
+      <NewIssueContainer>
+        <CommentFormContainer />
+        <Sidebar></Sidebar>
+      </NewIssueContainer>
+    </NewIssueProvider>
   );
 };
 

@@ -1,5 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
+import  { Redirect } from 'react-router-dom'
 import styled from 'styled-components';
+import { NewIssueContext } from '@context/NewIssueContext';
+import { postNewIssue } from '@api';
 
 const CForm = styled.div`
   display: flex;
@@ -35,11 +38,23 @@ const CommentSubmit = styled.button`
 `;
 
 const CommentForm = (props) => {
-  return (
+  const [redirect, setRedirect] = useState(false);
+
+  const newIssueContext = useContext(NewIssueContext);
+
+  const submitNewIssue = async () => {
+    const { title, detail } = newIssueContext;
+    console.log(title, detail);
+    await postNewIssue(title, detail);
+    setRedirect(true);
+    return <Redirect to='/' />
+  }
+
+  return redirect ? (<Redirect to='/' />) : (
     <CForm>
-      <CommentTitle placeholder='Title'/>
-      <CommentDetail placeholder='Leave a comment'/>
-      <CommentSubmit>Submit New Issue</CommentSubmit>
+      <CommentTitle value={newIssueContext.title} onChange={(e) => newIssueContext.setTitle(e.target.value)} placeholder='Title'/>
+      <CommentDetail value={newIssueContext.detail} onChange={(e) => newIssueContext.setDetail(e.target.value)} placeholder='Leave a comment'/>
+      <CommentSubmit onClick={submitNewIssue}>Submit New Issue</CommentSubmit>
     </CForm>
   );
 };

@@ -35,6 +35,14 @@ const fetchIssuesWithData = (data) =>
     },
   });
 
+const postNewIssue = (title, detail) => {
+  console.log(title, detail);
+  return instance.post('/issue', {
+    title: title,
+    detail: detail
+  });
+}
+
 export {
   fetchUsers,
   fetchLabels,
@@ -45,4 +53,5 @@ export {
   fetchIssueDetail,
   fetchIssuesCount,
   fetchIssuesWithData,
+  postNewIssue,
 };
