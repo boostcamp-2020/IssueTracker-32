@@ -13,14 +13,12 @@ const CommentList = (props) => {
 
   return (
     <List>
-      { 
-        issueData
-          ? issueData.comments.map((comment, i) => {
-            return (<CommentListItem comment={comment}/>)
+      {issueData
+        ? issueData.comments.map((comment, i) => {
+            return <CommentListItem comment={comment} />;
           })
-          : (null)
-      } 
-      <CommentForm />
+        : null}
+      <CommentForm issueData={issueData} />
     </List>
   );
 };

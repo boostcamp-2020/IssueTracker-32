@@ -27,6 +27,7 @@ module.exports = {
       '@Common': path.resolve(__dirname, 'src/components/Common'),
       '@IssuePage': path.resolve(__dirname, 'src/components/IssuePage'),
       '@NewIssuePage': path.resolve(__dirname, 'src/components/NewIssuePage'),
+      '@IssueDetailPage': path.resolve(__dirname, 'src/components/IssueDetailPage'),
       '@pages': path.resolve(__dirname, 'src/pages/'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
     },

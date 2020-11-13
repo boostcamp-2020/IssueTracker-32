@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import IssueDetailHeader from '../components/IssueDetailPage/IssueDetailHeader';
-import IssueDetailContainer from '../components/IssueDetailPage/IssueDetailContainer';
-import { fetchIssueDetail } from '../api';
+import IssueDetailHeader from '@IssueDetailPage/IssueDetailHeader';
+import IssueDetailContainer from '@IssueDetailPage/IssueDetailContainer';
+import { fetchIssueDetail } from '@api';
 
 const DetailPage = styled.div`
   display: flex;
@@ -29,8 +29,8 @@ const IssueDetailPage = ({ match }) => {
 
   return (
     <DetailPage>
-      <IssueDetailHeader issueData={issueData}/>
-      <IssueDetailContainer issueData={issueData}/>
+      <IssueDetailHeader issueData={issueData} />
+      <IssueDetailContainer issueData={issueData} />
     </DetailPage>
   );
 };
